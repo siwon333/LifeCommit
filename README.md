@@ -3,7 +3,7 @@
 > GitHub 잔디밭 스타일의 습관 트래커
 
 ## 📸 스크린샷
-[이미지들](./screenshots.png)
+(./screenshots.png)
 
 ## ✨ 주요 기능
 - GitHub 스타일 잔디밭
@@ -24,3 +24,4 @@
 ## 📄 라이선스
 
 MIT
+
