@@ -7,6 +7,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, addDoc, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // Firebase 설정 - Firebase Console에서 가져온 값으로 교체하세요
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Firebase 초기화
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // 전역으로 Firebase 객체 노출
+        window.firebaseAuth = auth;
+        window.firebaseDb = db;
+        window.firebaseAuthFunctions = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged };
+        window.firebaseDbFunctions = { doc, setDoc, getDoc, collection, query, where, getDocs, addDoc, updateDoc, deleteDoc };
+    </script>
+
     <style>
         :root {
             --grass-empty: #1a1f2e;
@@ -1001,6 +1030,22 @@
             text-decoration: underline;
         }
 
+        .auth-error {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .auth-loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
         /* 통계 페이지 */
         .stats-grid {
             display: grid;
@@ -1214,18 +1259,19 @@
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label class="form-label">이메일</label>
-                    <input type="email" class="form-input" placeholder="your@email.com" required>
+                    <input type="email" class="form-input" id="authEmail" placeholder="your@email.com" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">비밀번호</label>
-                    <input type="password" class="form-input" placeholder="••••••••" required>
+                    <input type="password" class="form-input" id="authPassword" placeholder="••••••••" required minlength="6">
                 </div>
+                <div id="authError" class="auth-error" style="display: none;"></div>
                 <div class="login-actions">
-                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <button type="submit" class="btn btn-primary" id="authSubmitBtn">로그인</button>
                 </div>
             </form>
             <div class="login-footer">
-                계정이 없으신가요? <a href="#" id="showSignupLink">회원가입</a>
+                <span id="authToggleText">계정이 없으신가요?</span> <a href="#" id="authToggleLink">회원가입</a>
             </div>
         </div>
     </div>
@@ -1563,6 +1609,7 @@
         let records = [];
         let currentPage = 'dashboard';
         let selectedHobbyId = null;
+        let isSignupMode = false;
 
         // 색상 상수
         const COLORS = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
@@ -1592,22 +1639,97 @@
             return formatDate(new Date());
         }
 
-        // 로컬스토리지 유틸리티
-        function saveToStorage() {
+        // Firebase Firestore 유틸리티
+        async function saveToFirestore() {
+            if (!currentUser || !window.firebaseDb) return;
+
+            const { doc, setDoc } = window.firebaseDbFunctions;
+            const db = window.firebaseDb;
+
+            try {
+                // 유저 데이터 저장
+                await setDoc(doc(db, 'users', currentUser.uid), {
+                    email: currentUser.email,
+                    name: currentUser.name,
+                    updatedAt: new Date().toISOString()
+                });
+
+                // 취미 데이터 저장
+                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'hobbies'), {
+                    items: hobbies
+                });
+
+                // 기록 데이터 저장
+                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'records'), {
+                    items: records
+                });
+
+                console.log('Firestore에 저장 완료');
+            } catch (error) {
+                console.error('Firestore 저장 오류:', error);
+                // 오프라인 백업으로 로컬스토리지도 사용
+                saveToLocalStorage();
+            }
+        }
+
+        async function loadFromFirestore() {
+            if (!currentUser || !window.firebaseDb) return;
+
+            const { doc, getDoc } = window.firebaseDbFunctions;
+            const db = window.firebaseDb;
+
+            try {
+                // 취미 데이터 로드
+                const hobbiesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'hobbies'));
+                if (hobbiesDoc.exists()) {
+                    hobbies = hobbiesDoc.data().items || [];
+                }
+
+                // 기록 데이터 로드
+                const recordsDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'records'));
+                if (recordsDoc.exists()) {
+                    records = recordsDoc.data().items || [];
+                }
+
+                console.log('Firestore에서 로드 완료');
+            } catch (error) {
+                console.error('Firestore 로드 오류:', error);
+                // 오프라인 백업에서 로드 시도
+                loadFromLocalStorage();
+            }
+        }
+
+        // 로컬스토리지 백업 (오프라인 지원)
+        function saveToLocalStorage() {
             localStorage.setItem('lifeCommitData', JSON.stringify({
-                currentUser,
                 hobbies,
                 records
             }));
         }
 
-        function loadFromStorage() {
+        function loadFromLocalStorage() {
             const data = localStorage.getItem('lifeCommitData');
             if (data) {
                 const parsed = JSON.parse(data);
-                currentUser = parsed.currentUser;
                 hobbies = parsed.hobbies || [];
                 records = parsed.records || [];
+            }
+        }
+
+        // 저장 함수 (Firestore 우선, 로컬 백업)
+        async function saveToStorage() {
+            if (currentUser && window.firebaseDb) {
+                await saveToFirestore();
+            }
+            saveToLocalStorage();
+        }
+
+        // 로드 함수 (Firestore 우선, 로컬 백업)
+        async function loadFromStorage() {
+            if (currentUser && window.firebaseDb) {
+                await loadFromFirestore();
+            } else {
+                loadFromLocalStorage();
             }
         }
 
@@ -1646,99 +1768,181 @@
             return Date.now().toString(36) + Math.random().toString(36).substr(2);
         }
 
-        // 로그인 처리
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            currentUser = {
-                id: generateId(),
-                email: email,
-                name: email.split('@')[0]
-            };
-            document.getElementById('userName').textContent = currentUser.name;
-            
-            // 초기 데이터 설정
-            if (hobbies.length === 0) {
-                // 예시 취미 추가
-                hobbies = [
-                    {
-                        id: generateId(),
-                        name: '운동',
-                        type: 'quant',
-                        targetValue: 30,
-                        unit: '분',
-                        icon: '💪',
-                        color: COLORS[0],
-                        isActive: true,
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: generateId(),
-                        name: '독서',
-                        type: 'quant',
-                        targetValue: 30,
-                        unit: '분',
-                        icon: '📚',
-                        color: COLORS[3],
-                        isActive: true,
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: generateId(),
-                        name: '명상',
-                        type: 'binary',
-                        icon: '🧘',
-                        color: COLORS[4],
-                        isActive: true,
-                        createdAt: new Date().toISOString()
-                    }
-                ];
+        // 에러 메시지 표시
+        function showAuthError(message) {
+            const errorEl = document.getElementById('authError');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
 
-                // 예시 기록 생성 (최근 30일)
-                const today = new Date();
-                for (let i = 0; i < 30; i++) {
-                    const date = new Date(today);
-                    date.setDate(date.getDate() - i);
-                    const dateStr = formatDate(date);
-                    
-                    hobbies.forEach(hobby => {
-                        if (Math.random() > 0.3) { // 70% 확률로 기록
-                            if (hobby.type === 'quant') {
-                                const value = hobby.targetValue * (0.5 + Math.random());
-                                records.push({
-                                    id: generateId(),
-                                    hobbyId: hobby.id,
-                                    date: dateStr,
-                                    value: Math.round(value),
-                                    achieved: value >= hobby.targetValue,
-                                    createdAt: new Date().toISOString()
-                                });
-                            } else {
-                                records.push({
-                                    id: generateId(),
-                                    hobbyId: hobby.id,
-                                    date: dateStr,
-                                    achieved: true,
-                                    createdAt: new Date().toISOString()
-                                });
-                            }
-                        }
-                    });
-                }
+        function hideAuthError() {
+            document.getElementById('authError').style.display = 'none';
+        }
+
+        // 회원가입/로그인 토글
+        document.getElementById('authToggleLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            isSignupMode = !isSignupMode;
+
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const toggleText = document.getElementById('authToggleText');
+            const toggleLink = document.getElementById('authToggleLink');
+
+            if (isSignupMode) {
+                submitBtn.textContent = '회원가입';
+                toggleText.textContent = '이미 계정이 있으신가요?';
+                toggleLink.textContent = '로그인';
+            } else {
+                submitBtn.textContent = '로그인';
+                toggleText.textContent = '계정이 없으신가요?';
+                toggleLink.textContent = '회원가입';
             }
 
-            saveToStorage();
+            hideAuthError();
+        });
+
+        // Firebase 에러 메시지 한글화
+        function getFirebaseErrorMessage(errorCode) {
+            const errorMessages = {
+                'auth/email-already-in-use': '이미 사용 중인 이메일입니다.',
+                'auth/invalid-email': '유효하지 않은 이메일 형식입니다.',
+                'auth/operation-not-allowed': '이메일/비밀번호 로그인이 비활성화되어 있습니다.',
+                'auth/weak-password': '비밀번호가 너무 약합니다. (최소 6자)',
+                'auth/user-disabled': '비활성화된 계정입니다.',
+                'auth/user-not-found': '존재하지 않는 계정입니다.',
+                'auth/wrong-password': '잘못된 비밀번호입니다.',
+                'auth/invalid-credential': '이메일 또는 비밀번호가 올바르지 않습니다.',
+                'auth/too-many-requests': '너무 많은 시도가 있었습니다. 잠시 후 다시 시도해주세요.',
+                'auth/network-request-failed': '네트워크 오류가 발생했습니다.'
+            };
+            return errorMessages[errorCode] || '인증 오류가 발생했습니다.';
+        }
+
+        // 초기 데이터 생성 (새 사용자용)
+        function createInitialData() {
+            hobbies = [
+                {
+                    id: generateId(),
+                    name: '운동',
+                    type: 'quant',
+                    targetValue: 30,
+                    unit: '분',
+                    icon: '💪',
+                    color: COLORS[0],
+                    isActive: true,
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: generateId(),
+                    name: '독서',
+                    type: 'quant',
+                    targetValue: 30,
+                    unit: '분',
+                    icon: '📚',
+                    color: COLORS[3],
+                    isActive: true,
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: generateId(),
+                    name: '명상',
+                    type: 'binary',
+                    icon: '🧘',
+                    color: COLORS[4],
+                    isActive: true,
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            records = [];
+        }
+
+        // 로그인 후 처리
+        async function handleAuthSuccess(user, isNewUser = false) {
+            currentUser = {
+                uid: user.uid,
+                email: user.email,
+                name: user.email.split('@')[0]
+            };
+
+            document.getElementById('userName').textContent = currentUser.name;
+
+            // 데이터 로드 또는 초기화
+            await loadFromStorage();
+
+            if (isNewUser || hobbies.length === 0) {
+                createInitialData();
+                await saveToStorage();
+            }
+
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'flex';
             renderDashboard();
+        }
+
+        // 로그인 처리
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            hideAuthError();
+
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const submitBtn = document.getElementById('authSubmitBtn');
+
+            // Firebase가 로드되지 않은 경우 체크
+            if (!window.firebaseAuth || !window.firebaseAuthFunctions) {
+                showAuthError('Firebase가 아직 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
+                return;
+            }
+
+            const { createUserWithEmailAndPassword, signInWithEmailAndPassword } = window.firebaseAuthFunctions;
+            const auth = window.firebaseAuth;
+
+            submitBtn.classList.add('auth-loading');
+            submitBtn.disabled = true;
+
+            try {
+                if (isSignupMode) {
+                    // 회원가입
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    console.log('회원가입 성공:', userCredential.user.email);
+                    await handleAuthSuccess(userCredential.user, true);
+                } else {
+                    // 로그인
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    console.log('로그인 성공:', userCredential.user.email);
+                    await handleAuthSuccess(userCredential.user, false);
+                }
+            } catch (error) {
+                console.error('인증 오류:', error);
+                showAuthError(getFirebaseErrorMessage(error.code));
+            } finally {
+                submitBtn.classList.remove('auth-loading');
+                submitBtn.disabled = false;
+            }
         });
 
         // 로그아웃
-        document.getElementById('logoutBtn').addEventListener('click', function() {
+        document.getElementById('logoutBtn').addEventListener('click', async function() {
             if (confirm('로그아웃 하시겠습니까?')) {
-                currentUser = null;
-                document.getElementById('mainApp').style.display = 'none';
-                document.getElementById('loginPage').style.display = 'flex';
+                try {
+                    if (window.firebaseAuth && window.firebaseAuthFunctions) {
+                        const { signOut } = window.firebaseAuthFunctions;
+                        await signOut(window.firebaseAuth);
+                    }
+
+                    currentUser = null;
+                    hobbies = [];
+                    records = [];
+
+                    document.getElementById('mainApp').style.display = 'none';
+                    document.getElementById('loginPage').style.display = 'flex';
+
+                    // 폼 초기화
+                    document.getElementById('loginForm').reset();
+                    hideAuthError();
+                } catch (error) {
+                    console.error('로그아웃 오류:', error);
+                }
             }
         });
 
@@ -2722,16 +2926,38 @@
             }
         }
 
+        // Firebase 인증 상태 감지 설정
+        function setupAuthStateListener() {
+            if (!window.firebaseAuth || !window.firebaseAuthFunctions) {
+                // Firebase가 아직 로드되지 않은 경우 재시도
+                setTimeout(setupAuthStateListener, 100);
+                return;
+            }
+
+            const { onAuthStateChanged } = window.firebaseAuthFunctions;
+            const auth = window.firebaseAuth;
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // 사용자가 로그인된 상태
+                    console.log('인증 상태: 로그인됨', user.email);
+                    await handleAuthSuccess(user, false);
+                } else {
+                    // 사용자가 로그아웃된 상태
+                    console.log('인증 상태: 로그아웃됨');
+                    currentUser = null;
+                    document.getElementById('mainApp').style.display = 'none';
+                    document.getElementById('loginPage').style.display = 'flex';
+                }
+            });
+        }
+
         // 초기 로드
         window.addEventListener('load', function() {
             initTheme();
-            loadFromStorage();
-            if (currentUser) {
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'flex';
-                renderDashboard();
-            }
+
+            // Firebase 인증 상태 감지 시작
+            setupAuthStateListener();
         });
     </script>
 </body>
