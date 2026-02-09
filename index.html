@@ -11,7 +11,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, addDoc, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         // Firebase 설정
@@ -33,7 +33,7 @@
         // 전역으로 Firebase 객체 노출
         window.firebaseAuth = auth;
         window.firebaseDb = db;
-        window.firebaseAuthFunctions = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged };
+        window.firebaseAuthFunctions = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail };
         window.firebaseDbFunctions = { doc, setDoc, getDoc, collection, query, where, getDocs, addDoc, updateDoc, deleteDoc };
     </script>
 
@@ -1047,6 +1047,33 @@
             pointer-events: none;
         }
 
+        .auth-success {
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .forgot-password a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
         /* 통계 페이지 */
         .stats-grid {
             display: grid;
@@ -1118,8 +1145,46 @@
             color: var(--success);
         }
 
+        /* 모바일 메뉴 버튼 */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 98;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
         /* 반응형 */
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s;
@@ -1131,7 +1196,7 @@
 
             .main-content {
                 margin-left: 0;
-                padding: 24px 16px;
+                padding: 80px 16px 24px 16px;
             }
 
             .hobby-grid {
@@ -1143,6 +1208,25 @@
             }
 
             .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .grass-grid {
+                overflow-x: auto;
+                padding-bottom: 8px;
+            }
+
+            .hobby-card {
+                padding: 16px;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1267,8 +1351,12 @@
                     <input type="password" class="form-input" id="authPassword" placeholder="••••••••" required minlength="6">
                 </div>
                 <div id="authError" class="auth-error" style="display: none;"></div>
+                <div id="authSuccess" class="auth-success" style="display: none;"></div>
                 <div class="login-actions">
                     <button type="submit" class="btn btn-primary" id="authSubmitBtn">로그인</button>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">비밀번호를 잊으셨나요?</a>
                 </div>
             </form>
             <div class="login-footer">
@@ -1279,8 +1367,12 @@
 
     <!-- 메인 앱 -->
     <div id="mainApp" class="app" style="display: none;">
+        <!-- 모바일 메뉴 버튼 -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <div class="mobile-overlay" id="mobileOverlay"></div>
+
         <!-- 사이드바 -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="logo">
                 <h1 style="cursor: pointer;" onclick="navigateTo('dashboard')">
                     <span class="logo-icon">🌱</span>
@@ -1780,6 +1872,52 @@
             document.getElementById('authError').style.display = 'none';
         }
 
+        function showAuthSuccess(message) {
+            const successEl = document.getElementById('authSuccess');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+        }
+
+        function hideAuthSuccess() {
+            document.getElementById('authSuccess').style.display = 'none';
+        }
+
+        // 비밀번호 재설정
+        document.getElementById('forgotPasswordLink').addEventListener('click', async function(e) {
+            e.preventDefault();
+            hideAuthError();
+            hideAuthSuccess();
+
+            const email = document.getElementById('authEmail').value;
+
+            if (!email) {
+                showAuthError('이메일을 먼저 입력해주세요.');
+                return;
+            }
+
+            if (!window.firebaseAuth || !window.firebaseAuthFunctions) {
+                showAuthError('Firebase가 아직 로드되지 않았습니다.');
+                return;
+            }
+
+            const { sendPasswordResetEmail } = window.firebaseAuthFunctions;
+            const auth = window.firebaseAuth;
+
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showAuthSuccess('비밀번호 재설정 이메일을 발송했습니다. 이메일을 확인해주세요.');
+            } catch (error) {
+                console.error('비밀번호 재설정 오류:', error);
+                if (error.code === 'auth/user-not-found') {
+                    showAuthError('등록되지 않은 이메일입니다.');
+                } else if (error.code === 'auth/invalid-email') {
+                    showAuthError('유효하지 않은 이메일 형식입니다.');
+                } else {
+                    showAuthError('이메일 발송에 실패했습니다. 다시 시도해주세요.');
+                }
+            }
+        });
+
         // 회원가입/로그인 토글
         document.getElementById('authToggleLink').addEventListener('click', function(e) {
             e.preventDefault();
@@ -1800,6 +1938,7 @@
             }
 
             hideAuthError();
+            hideAuthSuccess();
         });
 
         // Firebase 에러 메시지 한글화
@@ -1952,6 +2091,31 @@
             toggleTheme();
         });
 
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('mobile-open');
+
+            if (isOpen) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            } else {
+                sidebar.classList.add('mobile-open');
+                overlay.classList.add('active');
+            }
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+        }
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+        document.getElementById('mobileOverlay').addEventListener('click', closeMobileMenu);
+
         // 페이지 네비게이션
         document.querySelectorAll('.nav-link, .widget-action').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -1965,7 +2129,10 @@
 
         function navigateTo(page) {
             currentPage = page;
-            
+
+            // 모바일 메뉴 닫기
+            closeMobileMenu();
+
             // 네비게이션 활성화
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
