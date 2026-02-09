@@ -2489,7 +2489,7 @@
         }
 
         // 오늘 기록 토글 (완료형) 또는 모달 열기 (수치형)
-        function toggleTodayRecord(hobbyId) {
+        async function toggleTodayRecord(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             const today = getTodayString();
             const existingRecord = records.find(r => r.hobbyId === hobbyId && r.date === today);
@@ -2511,7 +2511,7 @@
                     };
                     records.push(newRecord);
                 }
-                saveToStorage();
+                await saveToStorage();
                 renderDashboard();
             } else {
                 // 수치형: 모달 열기
@@ -2586,13 +2586,13 @@
         }
 
         // 기록 저장
-        document.getElementById('recordForm').addEventListener('submit', function(e) {
+        document.getElementById('recordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const hobby = hobbies.find(h => h.id === selectedHobbyId);
             const today = getTodayString();
             const memo = document.getElementById('recordMemo').value;
-            
+
             let recordData = {
                 hobbyId: selectedHobbyId,
                 date: today,
@@ -2619,7 +2619,7 @@
                 records.push(recordData);
             }
 
-            saveToStorage();
+            await saveToStorage();
             closeRecordModal();
             renderDashboard();
         });
@@ -2676,20 +2676,20 @@
         }
 
         // 취미 활성화/비활성화
-        function toggleHobbyActive(hobbyId) {
+        async function toggleHobbyActive(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             hobby.isActive = !hobby.isActive;
-            saveToStorage();
+            await saveToStorage();
             renderHobbiesList();
         }
 
         // 취미 삭제
-        function deleteHobby(hobbyId) {
+        async function deleteHobby(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             if (confirm(`"${hobby.name}"을(를) 삭제하시겠습니까?\n모든 기록도 함께 삭제됩니다.`)) {
                 hobbies = hobbies.filter(h => h.id !== hobbyId);
                 records = records.filter(r => r.hobbyId !== hobbyId);
-                saveToStorage();
+                await saveToStorage();
                 renderHobbiesList();
             }
         }
@@ -2786,21 +2786,21 @@
         });
 
         // 취미 저장
-        document.getElementById('hobbyForm').addEventListener('submit', function(e) {
+        document.getElementById('hobbyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const editId = this.getAttribute('data-edit-id');
             const name = document.getElementById('hobbyName').value;
             const type = document.querySelector('input[name="hobbyType"]:checked').value;
             const icon = document.querySelector('.icon-option.selected').getAttribute('data-icon');
-            
+
             if (editId) {
                 // 수정 모드
                 const hobby = hobbies.find(h => h.id === editId);
                 hobby.name = name;
                 hobby.type = type;
                 hobby.icon = icon;
-                
+
                 if (type === 'quant') {
                     hobby.targetValue = parseInt(document.getElementById('targetValue').value);
                     hobby.unit = document.getElementById('targetUnit').value;
@@ -2811,7 +2811,7 @@
                     delete hobby.targetValue;
                     delete hobby.unit;
                 }
-                
+
                 hobby.updatedAt = new Date().toISOString();
             } else {
                 // 생성 모드
@@ -2836,9 +2836,9 @@
                 hobbies.push(hobbyData);
             }
 
-            saveToStorage();
+            await saveToStorage();
             closeHobbyModal();
-            
+
             // 현재 페이지에 따라 렌더링
             if (currentPage === 'hobbies') {
                 renderHobbiesList();
