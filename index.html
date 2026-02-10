@@ -2716,10 +2716,14 @@
                     document.getElementById('binaryFields').style.display = 'none';
                     document.getElementById('targetValue').value = hobby.targetValue;
                     document.getElementById('targetUnit').value = hobby.unit;
+                    document.getElementById('targetValue').required = true;
+                    document.getElementById('targetUnit').required = true;
                 } else {
                     document.getElementById('quantFields').style.display = 'none';
                     document.getElementById('binaryFields').style.display = 'block';
                     document.getElementById('binaryDesc').value = hobby.description || '';
+                    document.getElementById('targetValue').required = false;
+                    document.getElementById('targetUnit').required = false;
                 }
                 
                 // 아이콘 선택
@@ -2742,6 +2746,8 @@
                 document.querySelector('input[name="hobbyType"][value="quant"]').checked = true;
                 document.getElementById('quantFields').style.display = 'block';
                 document.getElementById('binaryFields').style.display = 'none';
+                document.getElementById('targetValue').required = true;
+                document.getElementById('targetUnit').required = true;
                 
                 // 아이콘 선택 초기화
                 document.querySelectorAll('.icon-option').forEach(opt => {
@@ -2769,9 +2775,13 @@
                 if (this.value === 'quant') {
                     document.getElementById('quantFields').style.display = 'block';
                     document.getElementById('binaryFields').style.display = 'none';
+                    document.getElementById('targetValue').required = true;
+                    document.getElementById('targetUnit').required = true;
                 } else {
                     document.getElementById('quantFields').style.display = 'none';
                     document.getElementById('binaryFields').style.display = 'block';
+                    document.getElementById('targetValue').required = false;
+                    document.getElementById('targetUnit').required = false;
                 }
             });
         });
