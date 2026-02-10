@@ -11,7 +11,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getAuth, setPersistence, browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
         import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs, addDoc, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
         // Firebase 설정
@@ -28,6 +28,7 @@
         // Firebase 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        await setPersistence(auth, browserLocalPersistence);
         const db = getFirestore(app);
 
         // 전역으로 Firebase 객체 노출
@@ -1809,12 +1810,12 @@
             }
         }
 
-        // 저장 함수 (Firestore 우선, 로컬 백업)
+        // 저장 함수 (로컬 먼저 저장 후 Firestore 동기화)
         async function saveToStorage() {
+            saveToLocalStorage();
             if (currentUser && window.firebaseDb) {
                 await saveToFirestore();
             }
-            saveToLocalStorage();
         }
 
         // 로드 함수 (Firestore 우선, 로컬 백업)
@@ -2009,7 +2010,7 @@
             // 데이터 로드 또는 초기화
             await loadFromStorage();
 
-            if (isNewUser || hobbies.length === 0) {
+            if (isNewUser) {
                 createInitialData();
                 await saveToStorage();
             }
@@ -2489,7 +2490,7 @@
         }
 
         // 오늘 기록 토글 (완료형) 또는 모달 열기 (수치형)
-        function toggleTodayRecord(hobbyId) {
+        async function toggleTodayRecord(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             const today = getTodayString();
             const existingRecord = records.find(r => r.hobbyId === hobbyId && r.date === today);
@@ -2511,7 +2512,7 @@
                     };
                     records.push(newRecord);
                 }
-                saveToStorage();
+                await saveToStorage();
                 renderDashboard();
             } else {
                 // 수치형: 모달 열기
@@ -2586,7 +2587,7 @@
         }
 
         // 기록 저장
-        document.getElementById('recordForm').addEventListener('submit', function(e) {
+        document.getElementById('recordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const hobby = hobbies.find(h => h.id === selectedHobbyId);
@@ -2619,7 +2620,7 @@
                 records.push(recordData);
             }
 
-            saveToStorage();
+            await saveToStorage();
             closeRecordModal();
             renderDashboard();
         });
@@ -2676,20 +2677,20 @@
         }
 
         // 취미 활성화/비활성화
-        function toggleHobbyActive(hobbyId) {
+        async function toggleHobbyActive(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             hobby.isActive = !hobby.isActive;
-            saveToStorage();
+            await saveToStorage();
             renderHobbiesList();
         }
 
         // 취미 삭제
-        function deleteHobby(hobbyId) {
+        async function deleteHobby(hobbyId) {
             const hobby = hobbies.find(h => h.id === hobbyId);
             if (confirm(`"${hobby.name}"을(를) 삭제하시겠습니까?\n모든 기록도 함께 삭제됩니다.`)) {
                 hobbies = hobbies.filter(h => h.id !== hobbyId);
                 records = records.filter(r => r.hobbyId !== hobbyId);
-                saveToStorage();
+                await saveToStorage();
                 renderHobbiesList();
             }
         }
@@ -2786,7 +2787,7 @@
         });
 
         // 취미 저장
-        document.getElementById('hobbyForm').addEventListener('submit', function(e) {
+        document.getElementById('hobbyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const editId = this.getAttribute('data-edit-id');
@@ -2836,9 +2837,9 @@
                 hobbies.push(hobbyData);
             }
 
-            saveToStorage();
+            await saveToStorage();
             closeHobbyModal();
-            
+
             // 현재 페이지에 따라 렌더링
             if (currentPage === 'hobbies') {
                 renderHobbiesList();
