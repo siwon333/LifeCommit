@@ -103,11 +103,17 @@
             width: 260px;
             background: var(--bg-secondary);
             border-right: 1px solid var(--border);
-            padding: 24px 0;
+            padding: 24px 0 0;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar nav {
+            flex: 1;
         }
 
         .logo {
@@ -184,10 +190,6 @@
         }
 
         .user-section {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             padding: 16px 24px;
             border-top: 1px solid var(--border);
             background: var(--bg-secondary);
@@ -1250,6 +1252,174 @@
             display: block;
         }
 
+        /* 광고 영역 */
+        .ad-sidebar {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ad-sidebar .ad-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+
+        .ad-sidebar .ad-slot {
+            background: var(--bg-tertiary);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            overflow: hidden;
+        }
+
+        .ad-footer {
+            margin-top: 48px;
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .ad-footer .ad-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .ad-footer .ad-slot {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            min-height: 100px;
+            max-width: 728px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            overflow: hidden;
+        }
+
+        .ad-popup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .ad-popup-modal.active {
+            display: flex;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        .ad-popup-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 480px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .ad-popup-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s;
+            z-index: 1;
+        }
+
+        .ad-popup-close:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .ad-popup-header {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding-right: 40px;
+        }
+
+        .ad-popup-header .ad-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+        }
+
+        .ad-popup-slot {
+            background: var(--bg-tertiary);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            overflow: hidden;
+        }
+
+        .ad-popup-footer {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .ad-popup-footer label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ad-popup-footer input[type="checkbox"] {
+            accent-color: var(--success);
+        }
+
+        @media (max-width: 768px) {
+            .ad-sidebar {
+                display: none;
+            }
+
+            .ad-footer .ad-slot {
+                min-height: 80px;
+            }
+        }
+
         /* 색상 선택기 */
         .color-picker {
             display: grid;
@@ -1408,6 +1578,12 @@
                     </li>
                 </ul>
             </nav>
+            <div class="ad-sidebar" id="sidebarAd">
+                <div class="ad-label">Sponsored</div>
+                <div class="ad-slot">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"crossorigin="anonymous"></script>
+                </div>
+            </div>
             <div class="user-section">
                 <div class="user-info">
                     <div class="user-avatar">U</div>
@@ -1593,7 +1769,35 @@
                     <button class="btn btn-secondary" id="backToDashboard">← 대시보드로 돌아가기</button>
                 </div>
             </div>
+            <!-- 페이지 하단 광고 -->
+            <div class="ad-footer" id="footerAd">
+                <div class="ad-label">Sponsored</div>
+                <div class="ad-slot">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"
+     crossorigin="anonymous"></script>
+                </div>
+            </div>
         </main>
+    </div>
+
+    <!-- 팝업 광고 모달 -->
+    <div id="adPopupModal" class="ad-popup-modal">
+        <div class="ad-popup-content">
+            <button class="ad-popup-close" onclick="closeAdPopup()">&times;</button>
+            <div class="ad-popup-header">
+                <div class="ad-label">Sponsored</div>
+            </div>
+            <div class="ad-popup-slot">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"
+     crossorigin="anonymous"></script>
+            </div>
+            <div class="ad-popup-footer">
+                <label>
+                    <input type="checkbox" id="adDontShowToday" onchange="setAdDontShowToday()">
+                    오늘 하루 보지 않기
+                </label>
+            </div>
+        </div>
     </div>
 
     <!-- 기록 모달 -->
@@ -1827,6 +2031,32 @@
             }
         }
 
+        // 팝업 광고 관리
+        function showAdPopup() {
+            const today = new Date().toISOString().split('T')[0];
+            const dontShowDate = localStorage.getItem('adDontShowDate');
+            if (dontShowDate === today) return;
+
+            setTimeout(function() {
+                document.getElementById('adPopupModal').classList.add('active');
+            }, 3000);
+        }
+
+        function closeAdPopup() {
+            document.getElementById('adPopupModal').classList.remove('active');
+        }
+
+        function setAdDontShowToday() {
+            const checked = document.getElementById('adDontShowToday').checked;
+            if (checked) {
+                const today = new Date().toISOString().split('T')[0];
+                localStorage.setItem('adDontShowDate', today);
+                closeAdPopup();
+            } else {
+                localStorage.removeItem('adDontShowDate');
+            }
+        }
+
         // 테마 관리
         function initTheme() {
             const savedTheme = localStorage.getItem('lifeCommitTheme') || 'dark';
@@ -2018,6 +2248,7 @@
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'flex';
             renderDashboard();
+            showAdPopup();
         }
 
         // 로그인 처리
