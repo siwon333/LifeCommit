@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용 가이드 - Life Commit</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 40px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--success);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .page-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .layout {
+            display: flex;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 40px;
+        }
+
+        .toc {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .toc-sticky {
+            position: sticky;
+            top: 80px;
+        }
+
+        .toc h3 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent);
+            background: var(--bg-secondary);
+        }
+
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .guide-section {
+            margin-bottom: 64px;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            scroll-margin-top: 80px;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+        }
+
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-body h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .step-body p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .tip-box {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .tip-box strong {
+            color: var(--accent);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .info-card-icon {
+            font-size: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .info-card p, .info-card li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .info-card ul {
+            padding-left: 16px;
+        }
+
+        .grass-demo {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .grass-demo-title {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .grass-row {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 3px;
+        }
+
+        .grass-cell {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        .g0 { background: #1a1f2e; }
+        .g1 { background: #0e4429; }
+        .g2 { background: #006d32; }
+        .g3 { background: #26a641; }
+        .g4 { background: #39d353; }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .legend-cell {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .level-desc {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .level-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .level-swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .warning-box {
+            background: rgba(210, 153, 34, 0.08);
+            border: 1px solid rgba(210, 153, 34, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .warning-box strong { color: var(--warning); }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 64px 0;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 32px 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: var(--text-muted); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 20px; }
+            .page-header { padding: 40px 20px; }
+            .layout { flex-direction: column; padding: 32px 20px; }
+            .toc { width: 100%; }
+            .toc-sticky { position: static; }
+            .info-grid { grid-template-columns: 1fr; }
+            footer { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">🌱 Life Commit</a>
+        <div class="nav-links">
+            <a href="index.html">홈</a>
+            <a href="about.html">서비스 소개</a>
+            <a href="privacy-policy.html">개인정보처리방침</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>📖 사용 가이드</h1>
+        <p>Life Commit을 처음 사용하시나요? 이 가이드를 따라 시작해보세요.</p>
+    </div>
+
+    <div class="layout">
+        <!-- 목차 -->
+        <aside class="toc">
+            <div class="toc-sticky">
+                <h3>목차</h3>
+                <ul class="toc-list">
+                    <li><a href="#start">1. 시작하기</a></li>
+                    <li><a href="#habit">2. 습관 추가하기</a></li>
+                    <li><a href="#record">3. 매일 기록하기</a></li>
+                    <li><a href="#grass">4. 잔디밭 이해하기</a></li>
+                    <li><a href="#stats">5. 통계 활용하기</a></li>
+                    <li><a href="#tips">6. 활용 팁</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 본문 -->
+        <div class="content">
+
+            <!-- 1. 시작하기 -->
+            <section class="guide-section" id="start">
+                <div class="section-number">1</div>
+                <h2>시작하기</h2>
+                <p class="section-intro">Life Commit을 사용하기 위해서는 먼저 계정이 필요합니다.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <h4>회원가입</h4>
+                            <p>홈 화면의 로그인 폼 하단 "계정이 없으신가요? 회원가입" 링크를 클릭합니다. 이메일 주소와 비밀번호(6자 이상)를 입력하고 회원가입 버튼을 누르세요.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <h4>로그인</h4>
+                            <p>가입한 이메일과 비밀번호로 로그인합니다. 이후 로그인 상태가 유지되어 다음 방문 시 자동으로 로그인됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <h4>대시보드 확인</h4>
+                            <p>로그인하면 대시보드가 표시됩니다. 처음에는 예시 습관 3개(운동, 독서, 명상)가 생성되어 있습니다. 이것들을 참고하여 자신만의 습관을 추가해보세요.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <strong>💡 팁:</strong> 비밀번호를 잊었다면 로그인 화면의 "비밀번호를 잊으셨나요?" 링크를 통해 재설정 메일을 받을 수 있습니다.
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- 2. 습관 추가하기 -->
+            <section class="guide-section" id="habit">
+                <div class="section-number">2</div>
+                <h2>습관 추가하기</h2>
+                <p class="section-intro">꾸준히 하고 싶은 습관을 등록하세요. 수치형과 완료형 두 가지 방식을 지원합니다.</p>
+
+                <div class="info-grid" style="margin-bottom: 24px;">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">📏</span>
+                            <h3>수치형 목표</h3>
+                        </div>
+                        <p>달성 수치를 직접 입력하는 방식입니다.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>운동 (목표: 30분)</li>
+                            <li>독서 (목표: 30페이지)</li>
+                            <li>영단어 암기 (목표: 50개)</li>
+                            <li>달리기 (목표: 5km)</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">☑️</span>
+                            <h3>완료형 목표</h3>
+                        </div>
+                        <p>했는지 안 했는지만 체크하는 방식입니다.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>명상</li>
+                            <li>일기 쓰기</li>
+                            <li>비타민 먹기</li>
+                            <li>냉수 샤워</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <h4>습관 관리 페이지로 이동</h4>
+                            <p>좌측 사이드바에서 ⚙️ Hobbies 메뉴를 클릭합니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <h4>새 습관 추가 클릭</h4>
+                            <p>"+ 새 취미 추가" 버튼을 클릭하면 모달창이 열립니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <h4>습관 정보 입력</h4>
+                            <p>습관 이름(최대 20자)을 입력하고, 수치형 또는 완료형을 선택하세요. 수치형은 목표값과 단위(분/개/회/페이지/km/잔)를 설정합니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <h4>아이콘 선택 후 저장</h4>
+                            <p>💪📚✍️🏃🧘🎨🎵🎮💻🌿☕🍎 중에서 아이콘을 선택하고 저장 버튼을 누릅니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <strong>💡 팁:</strong> 처음에는 2~3개만 시작하는 것을 추천합니다. 너무 많은 목표는 지속하기 어렵습니다. 꾸준히 달성할 수 있는 목표를 먼저 설정하고 점차 늘려가세요.
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- 3. 매일 기록하기 -->
+            <section class="guide-section" id="record">
+                <div class="section-number">3</div>
+                <h2>매일 기록하기</h2>
+                <p class="section-intro">대시보드에서 오늘의 습관을 기록합니다. 가능한 매일 저녁 하루를 마무리하며 기록하는 것을 추천합니다.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <h4>대시보드 열기</h4>
+                            <p>사이드바에서 📊 Dashboard를 클릭하거나, 로그인 직후 자동으로 대시보드가 표시됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <h4>완료형 습관 체크</h4>
+                            <p>완료형 습관 카드의 "오늘 체크" 버튼을 클릭하면 즉시 완료로 표시됩니다. 다시 클릭하면 취소됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <h4>수치형 습관 기록</h4>
+                            <p>수치형 습관 카드의 "오늘 체크" 버튼을 클릭하면 기록 모달이 열립니다. 달성한 수치를 입력하고 저장합니다. 메모도 남길 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <h4>진행도 확인</h4>
+                            <p>대시보드 상단의 원형 진행도로 오늘 전체 목표 중 몇 개를 달성했는지 확인할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-grid" style="margin-top: 20px;">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">🟢</span>
+                            <h3>달성 상태 배지</h3>
+                        </div>
+                        <ul>
+                            <li><strong>미완료</strong> — 아직 기록하지 않은 상태</li>
+                            <li><strong>완료</strong> — 목표 달성 (초록색)</li>
+                            <li><strong>초과달성</strong> — 목표의 150% 이상 (주황색)</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">⚙️</span>
+                            <h3>습관 수정</h3>
+                        </div>
+                        <p>카드 우측 하단의 ⚙️ 버튼을 클릭하면 습관 이름, 목표값, 아이콘을 수정할 수 있습니다. 기존 기록은 유지됩니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- 4. 잔디밭 이해하기 -->
+            <section class="guide-section" id="grass">
+                <div class="section-number">4</div>
+                <h2>잔디밭 이해하기</h2>
+                <p class="section-intro">잔디밭(Contribution Graph)은 Life Commit의 핵심 시각화 도구입니다.</p>
+
+                <div class="grass-demo">
+                    <div class="grass-demo-title">잔디밭 미리보기 (예시)</div>
+                    <div class="grass-row">
+                        <div class="grass-cell g0"></div><div class="grass-cell g0"></div><div class="grass-cell g1"></div><div class="grass-cell g2"></div><div class="grass-cell g0"></div><div class="grass-cell g3"></div><div class="grass-cell g4"></div>
+                        <div class="grass-cell g0"></div><div class="grass-cell g2"></div><div class="grass-cell g3"></div><div class="grass-cell g4"></div><div class="grass-cell g4"></div><div class="grass-cell g3"></div><div class="grass-cell g0"></div>
+                        <div class="grass-cell g1"></div><div class="grass-cell g2"></div><div class="grass-cell g0"></div><div class="grass-cell g4"></div><div class="grass-cell g4"></div><div class="grass-cell g2"></div><div class="grass-cell g3"></div>
+                        <div class="grass-cell g4"></div><div class="grass-cell g0"></div><div class="grass-cell g3"></div><div class="grass-cell g2"></div><div class="grass-cell g0"></div><div class="grass-cell g4"></div><div class="grass-cell g3"></div>
+                    </div>
+                    <div class="legend">
+                        <span>Less</span>
+                        <div class="legend-cell g0"></div>
+                        <div class="legend-cell g1"></div>
+                        <div class="legend-cell g2"></div>
+                        <div class="legend-cell g3"></div>
+                        <div class="legend-cell g4"></div>
+                        <span>More</span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3 style="margin-bottom:12px;">📏 수치형 잔디 색상</h3>
+                        <div class="level-desc">
+                            <div class="level-row"><div class="level-swatch g0"></div>기록 없음 (0%)</div>
+                            <div class="level-row"><div class="level-swatch g1"></div>기록 있음 (1~49%)</div>
+                            <div class="level-row"><div class="level-swatch g2"></div>절반 달성 (50~99%)</div>
+                            <div class="level-row"><div class="level-swatch g3"></div>목표 달성 (100~149%)</div>
+                            <div class="level-row"><div class="level-swatch g4"></div>초과 달성 (150% 이상)</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3 style="margin-bottom:12px;">☑️ 완료형 잔디 색상</h3>
+                        <div class="level-desc">
+                            <div class="level-row"><div class="level-swatch g0"></div>미완료</div>
+                            <div class="level-row"><div class="level-swatch g4"></div>완료</div>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <h3 style="margin-bottom:12px;">🏆 Overall 잔디 색상</h3>
+                            <div class="level-desc">
+                                <div class="level-row"><div class="level-swatch g0"></div>일부 미달성</div>
+                                <div class="level-row"><div class="level-swatch g4"></div>모든 목표 달성</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box" style="margin-top: 20px;">
+                    <strong>💡 잔디 호버:</strong> 잔디 칸에 마우스를 올리면 해당 날짜와 달성 기록이 툴팁으로 표시됩니다. 특정 날짜의 기록을 쉽게 확인할 수 있습니다.
+                </div>
+                <div class="tip-box">
+                    <strong>💡 연도 선택:</strong> 잔디밭 우측 상단의 드롭다운에서 연도를 선택하면 해당 연도의 잔디밭을 볼 수 있습니다.
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- 5. 통계 활용하기 -->
+            <section class="guide-section" id="stats">
+                <div class="section-number">5</div>
+                <h2>통계 활용하기</h2>
+                <p class="section-intro">대시보드 하단과 Stats 페이지에서 자신의 성취를 분석할 수 있습니다.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">①</div>
+                        <div class="step-body">
+                            <h4>전체 달성률</h4>
+                            <p>올해 경과한 날 기준으로, 전체 가능한 기록 수 대비 달성한 기록의 비율입니다. 예: 3가지 습관을 30일간 기록했을 때 전체 가능 기록은 90개. 이 중 60개를 달성했다면 달성률은 67%입니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">②</div>
+                        <div class="step-body">
+                            <h4>완벽한 하루</h4>
+                            <p>모든 활성 습관을 달성한 날의 수입니다. Overall 잔디밭과 연동됩니다. 완벽한 하루가 많을수록 잔디밭이 더 초록색으로 가득 찹니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">③</div>
+                        <div class="step-body">
+                            <h4>현재 연속 기록 (스트릭)</h4>
+                            <p>오늘부터 역순으로 연속으로 달성한 날의 수입니다. 하루라도 빠지면 스트릭이 초기화됩니다. 스트릭 유지가 꾸준함의 강력한 동기가 됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">④</div>
+                        <div class="step-body">
+                            <h4>취미별 달성률</h4>
+                            <p>각 습관별로 달성률과 현재/최장 스트릭을 확인할 수 있습니다. 어떤 습관이 잘 되고 있는지, 어떤 습관에 더 집중해야 하는지 파악할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- 6. 활용 팁 -->
+            <section class="guide-section" id="tips">
+                <div class="section-number">6</div>
+                <h2>활용 팁</h2>
+                <p class="section-intro">Life Commit을 더 효과적으로 사용하는 방법들입니다.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>적은 목표부터 시작하세요</h4>
+                            <p>처음부터 10개의 습관을 추가하면 금방 지칩니다. 2~3개의 핵심 습관부터 시작해서 꾸준히 달성하는 패턴을 만든 후 점차 늘려가세요.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>목표는 낮게 설정하세요</h4>
+                            <p>운동을 처음 시작한다면 "60분"보다 "10분"이 훨씬 지속 가능합니다. 낮은 목표를 꾸준히 달성하고 초과달성하는 것이 높은 목표를 자주 실패하는 것보다 훨씬 효과적입니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>매일 같은 시간에 기록하세요</h4>
+                            <p>기록 자체도 하나의 습관입니다. 매일 저녁 9시처럼 고정된 시간에 기록하는 루틴을 만들면 빠뜨리는 날이 줄어듭니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>스트릭이 끊겨도 포기하지 마세요</h4>
+                            <p>여행, 아픔 등으로 하루를 빠뜨릴 수 있습니다. 스트릭이 끊겼다고 포기하지 말고 다음 날부터 다시 시작하세요. 중요한 것은 전체적인 달성률입니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>비활성 토글을 활용하세요</h4>
+                            <p>여행 중이거나 특정 기간 동안 집중할 수 없는 습관은 삭제하지 말고 Hobbies 페이지에서 토글로 비활성화하세요. 기록은 유지되고 Overall 계산에서 제외됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">★</div>
+                        <div class="step-body">
+                            <h4>메모를 적극 활용하세요</h4>
+                            <p>수치형 기록 시 메모 칸에 오늘의 컨디션, 특이사항 등을 남겨두면 나중에 잔디밭을 돌아볼 때 더 의미있는 기록이 됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ 참고사항:</strong> 현재 과거 날짜의 기록을 직접 수정하는 UI는 지원하지 않습니다. 오늘 날짜의 기록만 수정할 수 있습니다.
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="about.html">서비스 소개</a>
+            <a href="privacy-policy.html">개인정보처리방침</a>
+        </div>
+        <div class="footer-copy">© 2026 Life Commit. 당신의 하루를 커밋하세요.</div>
+    </footer>
+</body>
+</html>

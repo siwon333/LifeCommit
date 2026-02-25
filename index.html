@@ -976,6 +976,156 @@
         }
 
         /* 로그인 페이지 */
+        /* ===== 랜딩 페이지 ===== */
+        .landing-page {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .landing-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 40px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .landing-nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--success);
+            text-decoration: none;
+        }
+
+        .landing-nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .landing-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .landing-nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .landing-hero {
+            display: flex;
+            gap: 64px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 40px 48px;
+        }
+
+        .landing-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .landing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            color: var(--success);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .landing-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .landing-title .highlight {
+            color: var(--success);
+        }
+
+        .landing-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+
+        .landing-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .landing-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .landing-feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .landing-feature-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .landing-feature-text p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .landing-grass-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .landing-grass-row {
+            display: flex;
+            gap: 3px;
+        }
+
+        .landing-grass-cell {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
         .login-container {
             min-height: 100vh;
             display: flex;
@@ -992,6 +1142,7 @@
             padding: 48px;
             max-width: 440px;
             width: 100%;
+            flex-shrink: 0;
         }
 
         .login-header {
@@ -1010,6 +1161,187 @@
         .login-tagline {
             color: var(--text-secondary);
             font-size: 15px;
+        }
+
+        /* 소개 섹션 */
+        .landing-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .landing-section-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .landing-section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 48px;
+        }
+
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .how-step {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .how-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .how-step-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .how-step h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .how-step p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .benefit-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 16px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .benefit-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .benefit-item h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .benefit-item p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .faq-question {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .landing-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .landing-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .landing-footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .landing-footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .landing-footer-copy {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .landing-hero {
+                flex-direction: column;
+                padding: 40px 24px;
+                gap: 40px;
+            }
+            .landing-features {
+                grid-template-columns: 1fr;
+            }
+            .landing-nav {
+                padding: 16px 24px;
+            }
+            .landing-nav-links {
+                gap: 16px;
+            }
+            .landing-title {
+                font-size: 32px;
+            }
+            .landing-section {
+                padding: 48px 24px;
+            }
         }
 
         .login-form .form-group {
@@ -1409,34 +1741,219 @@
 </head>
 <body>
     <!-- 로그인 페이지 -->
-    <div id="loginPage" class="login-container">
-        <div class="login-box">
-            <div class="login-header">
-                <div class="login-logo">🌱 Life Commit</div>
-                <div class="login-tagline">당신의 하루를 커밋하세요</div>
+    <div id="loginPage" class="landing-page">
+        <!-- 상단 내비게이션 -->
+        <nav class="landing-nav">
+            <a href="index.html" class="landing-nav-logo">🌱 Life Commit</a>
+            <div class="landing-nav-links">
+                <a href="about.html">서비스 소개</a>
+                <a href="guide.html">사용 가이드</a>
+                <a href="privacy-policy.html">개인정보처리방침</a>
             </div>
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label class="form-label">이메일</label>
-                    <input type="email" class="form-input" id="authEmail" placeholder="your@email.com" required>
+        </nav>
+
+        <!-- 히어로 + 로그인 섹션 -->
+        <div class="landing-hero">
+            <!-- 왼쪽: 서비스 소개 -->
+            <div class="landing-content">
+                <div class="landing-badge">✨ GitHub 잔디밭 스타일 습관 트래커</div>
+                <h1 class="landing-title">
+                    당신의 하루를<br><span class="highlight">커밋하세요</span>
+                </h1>
+                <p class="landing-subtitle">
+                    Life Commit은 GitHub의 잔디밭(Contribution Graph)에서 영감을 받은 습관 트래커입니다.
+                    매일의 작은 성취를 "커밋"으로 기록하고, 연간 달성 패턴을 한눈에 시각화하세요.
+                    꾸준함이 쌓여 만들어지는 초록빛 잔디를 함께 만들어 보세요.
+                </p>
+                <div class="landing-features">
+                    <div class="landing-feature-item">
+                        <div class="landing-feature-icon">🌱</div>
+                        <div class="landing-feature-text">
+                            <h4>GitHub 스타일 잔디밭</h4>
+                            <p>연간 365일 달성 현황을 잔디밭 그래프로 시각화합니다.</p>
+                        </div>
+                    </div>
+                    <div class="landing-feature-item">
+                        <div class="landing-feature-icon">🎯</div>
+                        <div class="landing-feature-text">
+                            <h4>수치형 &amp; 완료형 목표</h4>
+                            <p>운동 시간, 독서 페이지 등 수치 목표와 단순 완료 체크를 모두 지원합니다.</p>
+                        </div>
+                    </div>
+                    <div class="landing-feature-item">
+                        <div class="landing-feature-icon">📊</div>
+                        <div class="landing-feature-text">
+                            <h4>상세한 통계 분석</h4>
+                            <p>달성률, 연속 기록(스트릭), 취미별 통계를 한눈에 확인하세요.</p>
+                        </div>
+                    </div>
+                    <div class="landing-feature-item">
+                        <div class="landing-feature-icon">🌙</div>
+                        <div class="landing-feature-text">
+                            <h4>다크 / 라이트 테마</h4>
+                            <p>눈에 편한 다크모드와 밝은 라이트모드를 자유롭게 전환하세요.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">비밀번호</label>
-                    <input type="password" class="form-input" id="authPassword" placeholder="••••••••" required minlength="6">
+                <div style="font-size:13px; color: var(--text-muted);">
+                    <strong style="color:var(--success);">🟢</strong> 현재 무료로 사용할 수 있습니다 &nbsp;·&nbsp;
+                    <a href="guide.html" style="color:var(--accent); text-decoration:none;">사용 방법 보기 →</a>
                 </div>
-                <div id="authError" class="auth-error" style="display: none;"></div>
-                <div id="authSuccess" class="auth-success" style="display: none;"></div>
-                <div class="login-actions">
-                    <button type="submit" class="btn btn-primary" id="authSubmitBtn">로그인</button>
+            </div>
+
+            <!-- 오른쪽: 로그인 폼 -->
+            <div class="login-box">
+                <div class="login-header">
+                    <div class="login-logo">🌱 Life Commit</div>
+                    <div class="login-tagline">당신의 하루를 커밋하세요</div>
                 </div>
-                <div class="forgot-password">
-                    <a href="#" id="forgotPasswordLink">비밀번호를 잊으셨나요?</a>
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" class="form-input" id="authEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">비밀번호</label>
+                        <input type="password" class="form-input" id="authPassword" placeholder="••••••••" required minlength="6">
+                    </div>
+                    <div id="authError" class="auth-error" style="display: none;"></div>
+                    <div id="authSuccess" class="auth-success" style="display: none;"></div>
+                    <div class="login-actions">
+                        <button type="submit" class="btn btn-primary" id="authSubmitBtn">로그인</button>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPasswordLink">비밀번호를 잊으셨나요?</a>
+                    </div>
+                </form>
+                <div class="login-footer">
+                    <span id="authToggleText">계정이 없으신가요?</span> <a href="#" id="authToggleLink">회원가입</a>
                 </div>
-            </form>
-            <div class="login-footer">
-                <span id="authToggleText">계정이 없으신가요?</span> <a href="#" id="authToggleLink">회원가입</a>
             </div>
         </div>
+
+        <!-- 이용 방법 섹션 -->
+        <section class="landing-section">
+            <h2 class="landing-section-title">어떻게 사용하나요?</h2>
+            <p class="landing-section-subtitle">3단계로 시작하는 나만의 습관 트래커</p>
+            <div class="how-it-works-grid">
+                <div class="how-step">
+                    <span class="how-step-number">1</span>
+                    <span class="how-step-icon">✍️</span>
+                    <h3>습관 목표 설정</h3>
+                    <p>운동, 독서, 명상 등 원하는 습관을 추가하고 목표 수치(시간, 횟수, 페이지 등)를 설정하세요.</p>
+                </div>
+                <div class="how-step">
+                    <span class="how-step-number">2</span>
+                    <span class="how-step-icon">✅</span>
+                    <h3>매일 기록</h3>
+                    <p>오늘의 달성 현황을 클릭 한 번으로 체크하거나 수치를 입력하세요. 간단할수록 꾸준히 할 수 있습니다.</p>
+                </div>
+                <div class="how-step">
+                    <span class="how-step-number">3</span>
+                    <span class="how-step-icon">🌱</span>
+                    <h3>잔디 성장 확인</h3>
+                    <p>매일 채워지는 잔디밭과 통계를 통해 성취감을 느끼고 꾸준함을 유지하세요.</p>
+                </div>
+                <div class="how-step">
+                    <span class="how-step-number">4</span>
+                    <span class="how-step-icon">📈</span>
+                    <h3>성과 분석</h3>
+                    <p>연간 달성률, 최장 연속 기록, 취미별 통계로 자신의 성장을 데이터로 확인하세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 장점 섹션 -->
+        <section class="landing-section">
+            <h2 class="landing-section-title">왜 Life Commit인가요?</h2>
+            <p class="landing-section-subtitle">습관 형성을 위해 설계된 스마트한 도구</p>
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎨</div>
+                    <div>
+                        <h3>시각적 동기 부여</h3>
+                        <p>GitHub 개발자들이 잔디밭을 채우며 느끼는 성취감을 일상 습관에도 적용했습니다. 초록색 잔디가 채워질수록 더 하고 싶어집니다.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div>
+                        <h3>빠른 기록</h3>
+                        <p>복잡한 절차 없이 클릭 한 번으로 완료 체크. 수치형 목표도 숫자 입력 하나로 끝납니다. 기록하는 데 30초도 안 걸립니다.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔒</div>
+                    <div>
+                        <h3>안전한 데이터</h3>
+                        <p>Firebase를 통해 클라우드에 안전하게 저장됩니다. 어디서든 로그인하면 내 기록을 확인할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <div>
+                        <h3>반응형 디자인</h3>
+                        <p>PC와 모바일 모두에서 편리하게 사용할 수 있도록 반응형으로 설계되었습니다.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🆓</div>
+                    <div>
+                        <h3>완전 무료</h3>
+                        <p>모든 기능을 무료로 이용할 수 있습니다. 숨겨진 비용이나 제한 없이 원하는 만큼 습관을 추가하고 기록하세요.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌓</div>
+                    <div>
+                        <h3>다크 / 라이트 테마</h3>
+                        <p>눈의 피로를 줄여주는 다크 모드와 밝은 라이트 모드를 지원합니다. 언제든 취향에 맞게 전환하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 섹션 -->
+        <section class="landing-section">
+            <h2 class="landing-section-title">자주 묻는 질문</h2>
+            <p class="landing-section-subtitle">궁금한 점이 있으신가요?</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Q. Life Commit은 무료인가요?</div>
+                    <div class="faq-answer">네, Life Commit은 완전 무료 서비스입니다. 회원가입 후 모든 기능을 제한 없이 이용할 수 있습니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 습관(취미)은 몇 개까지 추가할 수 있나요?</div>
+                    <div class="faq-answer">제한 없이 원하는 만큼 습관을 추가할 수 있습니다. 운동, 독서, 명상, 언어 학습 등 다양한 목표를 자유롭게 설정하세요.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 수치형과 완료형의 차이는 무엇인가요?</div>
+                    <div class="faq-answer">수치형은 "30분 운동", "50페이지 독서"처럼 달성 수치를 입력하는 방식입니다. 목표 수치 이상 달성하면 완료로 처리됩니다. 완료형은 명상, 일기 쓰기처럼 했는지 안 했는지만 체크하는 방식입니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. Overall 잔디밭은 무엇인가요?</div>
+                    <div class="faq-answer">모든 활성 습관을 하루에 전부 달성했을 때만 Overall 잔디에 커밋이 기록됩니다. 완벽한 하루를 만들었을 때의 성취감을 더욱 특별하게 느낄 수 있습니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 데이터는 어디에 저장되나요?</div>
+                    <div class="faq-answer">모든 데이터는 Google Firebase 클라우드에 안전하게 저장됩니다. 기기가 바뀌어도 로그인하면 동일한 데이터를 확인할 수 있습니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 모바일에서도 사용할 수 있나요?</div>
+                    <div class="faq-answer">네, Life Commit은 반응형으로 설계되어 스마트폰과 태블릿에서도 편리하게 이용할 수 있습니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="landing-footer">
+            <div class="landing-footer-links">
+                <a href="about.html">서비스 소개</a>
+                <a href="guide.html">사용 가이드</a>
+                <a href="privacy-policy.html">개인정보처리방침</a>
+            </div>
+            <div class="landing-footer-copy">© 2026 Life Commit. 당신의 하루를 커밋하세요.</div>
+        </footer>
     </div>
 
     <!-- 메인 앱 -->
