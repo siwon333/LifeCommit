@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서비스 소개 - Life Commit</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 40px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--success);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            color: var(--success);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--success);
+            color: #0d1117;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.2s;
+        }
+
+        .hero-cta:hover { opacity: 0.85; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 64px 40px;
+        }
+
+        .section {
+            margin-bottom: 72px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 640px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .feature-card-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .story-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .story-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .story-card p:last-child { margin-bottom: 0; }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .concept-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .concept-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .concept-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-tag {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .cta-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            font-size: 15px;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 32px 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy { color: var(--text-muted); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 20px; }
+            .hero { padding: 48px 20px; }
+            .hero h1 { font-size: 32px; }
+            .container { padding: 40px 20px; }
+            .concept-grid { grid-template-columns: 1fr; }
+            footer { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">🌱 Life Commit</a>
+        <div class="nav-links">
+            <a href="index.html">홈</a>
+            <a href="guide.html">사용 가이드</a>
+            <a href="privacy-policy.html">개인정보처리방침</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-badge">🌱 Life Commit 소개</div>
+        <h1>🌱 Life Commit</h1>
+        <p>GitHub 잔디밭 스타일에서 영감받은 습관 트래커. 매일의 성취를 커밋으로 기록하고 초록빛 잔디를 함께 키워보세요.</p>
+        <a href="index.html" class="hero-cta">지금 시작하기 →</a>
+    </section>
+
+    <div class="container">
+
+        <!-- 탄생 배경 -->
+        <div class="section">
+            <div class="section-label">Our Story</div>
+            <h2>Life Commit이 탄생한 이유</h2>
+            <p class="section-desc">좋은 습관을 만들기 위한 가장 효과적인 방법은 무엇일까요?</p>
+            <div class="story-card">
+                <p>개발자들은 GitHub 잔디밭을 보며 코딩에 동기를 얻습니다. 초록빛으로 채워지는 365칸의 잔디는 단순한 시각화를 넘어, 꾸준함에 대한 강력한 피드백이 됩니다. 하루라도 비어있으면 채우고 싶어지고, 연속 기록이 쌓이면 더 이어가고 싶어집니다.</p>
+                <p>Life Commit은 이 강력한 심리적 메커니즘을 일상 습관에도 적용하고자 탄생했습니다. 운동, 독서, 명상, 언어 학습 등 꾸준히 하고 싶은 모든 습관을 "커밋"으로 기록하고, GitHub 잔디밭처럼 시각화해보세요.</p>
+                <p>매일 아침 앱을 열어 어제의 잔디를 확인하고, 오늘의 목표를 설정하며 하루를 시작하는 루틴. 저녁에는 오늘의 성취를 커밋하며 하루를 마무리하는 의식. Life Commit은 바로 그 경험을 만들어 드립니다.</p>
+            </div>
+        </div>
+
+        <!-- 핵심 기능 -->
+        <div class="section">
+            <div class="section-label">Features</div>
+            <h2>핵심 기능</h2>
+            <p class="section-desc">Life Commit이 제공하는 모든 기능을 소개합니다.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-card-icon">🌱</div>
+                    <h3>GitHub 스타일 잔디밭</h3>
+                    <p>연간 365일의 달성 현황을 GitHub Contribution Graph와 동일한 방식으로 시각화합니다. 초록빛 잔디가 채워질수록 성취감이 쌓입니다. 취미별 잔디밭과 모든 목표를 달성한 날만 기록되는 Overall 잔디밭을 제공합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🎯</div>
+                    <h3>수치형 목표 트래킹</h3>
+                    <p>운동 30분, 독서 50페이지, 영단어 50개처럼 달성 수치를 입력하는 방식입니다. 목표치 이상 달성 시 완료, 150% 이상 달성 시 초과달성으로 구분하여 더 세밀한 기록이 가능합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">✅</div>
+                    <h3>원클릭 완료 체크</h3>
+                    <p>명상, 일기 쓰기처럼 했는지 안 했는지만 확인이 필요한 습관은 클릭 한 번으로 체크합니다. 간단할수록 꾸준히 할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">📊</div>
+                    <h3>통계 및 스트릭 분석</h3>
+                    <p>전체 달성률, 현재 연속 기록(스트릭), 최장 연속 기록, 취미별 달성률 등 다양한 통계를 제공합니다. 자신의 패턴을 파악하고 목표를 조정하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🏆</div>
+                    <h3>Overall 완벽한 하루</h3>
+                    <p>모든 활성 습관을 달성했을 때만 Overall 잔디에 커밋됩니다. 완벽한 하루를 만들어 연속 기록을 이어가는 특별한 성취감을 경험하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🌓</div>
+                    <h3>다크 / 라이트 테마</h3>
+                    <p>눈의 피로를 최소화하는 다크 모드(기본)와 밝고 명쾌한 라이트 모드를 지원합니다. 언제든 한 번의 클릭으로 전환할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">☁️</div>
+                    <h3>클라우드 동기화</h3>
+                    <p>Firebase를 통해 모든 데이터가 클라우드에 안전하게 저장됩니다. PC, 노트북, 스마트폰 등 어떤 기기에서도 같은 데이터를 확인할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">📅</div>
+                    <h3>연도별 히스토리</h3>
+                    <p>드롭다운으로 연도를 선택하면 해당 연도의 잔디밭과 통계를 확인할 수 있습니다. 올해뿐만 아니라 작년의 성취도 한눈에 돌아보세요.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 핵심 컨셉 -->
+        <div class="section">
+            <div class="section-label">Concept</div>
+            <h2>핵심 컨셉</h2>
+            <p class="section-desc">Life Commit을 만든 두 가지 중요한 아이디어</p>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>🔗 커밋(Commit)이라는 은유</h3>
+                    <p>소프트웨어 개발에서 "커밋"은 변경사항을 확정하는 행위입니다. 돌이킬 수 없지만, 그렇기에 의미있는 기록이 됩니다. 오늘 운동 30분을 했다면, 그것을 "커밋"하세요. 내일의 나에게, 미래의 나에게 보내는 작은 선물입니다.</p>
+                </div>
+                <div class="concept-card">
+                    <h3>🌱 잔디밭(Contribution Graph)</h3>
+                    <p>GitHub의 잔디밭은 개발자들에게 강력한 동기 부여 도구입니다. 비어있는 칸을 채우고 싶은 충동, 연속 기록을 이어가고 싶은 욕구. Life Commit은 이 심리적 메커니즘을 삶의 모든 습관에 적용합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 기술 스택 -->
+        <div class="section">
+            <div class="section-label">Tech Stack</div>
+            <h2>기술 스택</h2>
+            <p class="section-desc">Life Commit을 만드는 데 사용된 기술들</p>
+            <div class="tech-list">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">Vanilla JavaScript</span>
+                <span class="tech-tag">Firebase Auth</span>
+                <span class="tech-tag">Cloud Firestore</span>
+                <span class="tech-tag">Google Fonts</span>
+                <span class="tech-tag">Responsive Design</span>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>지금 바로 시작하세요</h2>
+            <p>회원가입 후 무료로 모든 기능을 이용할 수 있습니다. 오늘부터 당신의 습관을 커밋해보세요.</p>
+            <a href="index.html" class="hero-cta">무료로 시작하기 →</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="guide.html">사용 가이드</a>
+            <a href="privacy-policy.html">개인정보처리방침</a>
+        </div>
+        <div class="footer-copy">© 2026 Life Commit. 당신의 하루를 커밋하세요.</div>
+    </footer>
+</body>
+</html>
