@@ -1321,6 +1321,179 @@
             font-size: 13px;
         }
 
+        /* 게스트 시작 버튼 */
+        .guest-start-btn {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 10px;
+            background: transparent;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .guest-start-btn:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        /* 게스트 모드 배너 */
+        .guest-banner {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            background: rgba(210, 153, 34, 0.1);
+            border-bottom: 1px solid rgba(210, 153, 34, 0.3);
+            padding: 10px 24px;
+            font-size: 13px;
+            color: var(--warning);
+            flex-shrink: 0;
+        }
+
+        .guest-banner-text {
+            flex: 1;
+        }
+
+        .guest-banner-login-btn {
+            background: var(--warning);
+            color: #0d1117;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+
+        .guest-banner-login-btn:hover { opacity: 0.85; }
+
+        .guest-banner-dismiss {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 6px;
+            line-height: 1;
+        }
+
+        .guest-banner-dismiss:hover { color: var(--text-secondary); }
+
+        /* 로그인 유도 팝업 */
+        #loginPromptModal .modal-content {
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .login-prompt-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .login-prompt-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .login-prompt-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .login-prompt-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .login-prompt-primary-btn {
+            background: var(--success);
+            color: #0d1117;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .login-prompt-primary-btn:hover { opacity: 0.85; }
+
+        .login-prompt-skip-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .login-prompt-skip-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        /* 데이터 마이그레이션 배너 */
+        .migrate-banner {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .migrate-banner-text {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+
+        .migrate-banner-text strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .migrate-yes-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .migrate-no-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
         @media (max-width: 900px) {
             .landing-hero {
                 flex-direction: column;
@@ -1828,6 +2001,9 @@
                 <div class="login-footer">
                     <span id="authToggleText">계정이 없으신가요?</span> <a href="#" id="authToggleLink">회원가입</a>
                 </div>
+                <button class="guest-start-btn" id="guestStartBtn">
+                    🔓 로그인 없이 체험하기 (기기에 저장)
+                </button>
             </div>
         </div>
 
@@ -2019,6 +2195,16 @@
 
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
+            <!-- 게스트 모드 배너 -->
+            <div class="guest-banner" id="guestBanner">
+                <span class="guest-banner-text">⚠️ 게스트 모드 — 데이터가 이 기기에만 저장됩니다. 로그인하면 어디서든 확인할 수 있습니다.</span>
+                <button class="guest-banner-login-btn" id="guestBannerLoginBtn">로그인 / 회원가입</button>
+                <button class="guest-banner-dismiss" id="guestBannerDismiss" title="닫기">✕</button>
+            </div>
+
+            <!-- 마이그레이션 배너 (동적으로 표시) -->
+            <div id="migrateBanner" style="display:none; padding: 0 24px; margin-top: 16px;"></div>
+
             <!-- 대시보드 페이지 -->
             <div id="dashboardPage" class="page active">
                 <div class="dashboard-header">
@@ -2297,6 +2483,23 @@
         </div>
     </div>
 
+    <!-- 로그인 유도 팝업 -->
+    <div id="loginPromptModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="login-prompt-icon">🌱</div>
+            <div class="login-prompt-title">기록을 안전하게 보관하세요</div>
+            <div class="login-prompt-desc">
+                현재 게스트 모드로 이 기기에만 저장되고 있습니다.<br>
+                로그인하면 클라우드에 자동 동기화되어<br>
+                어떤 기기에서도 내 잔디밭을 확인할 수 있어요.
+            </div>
+            <div class="login-prompt-actions">
+                <button class="login-prompt-primary-btn" id="loginPromptLoginBtn">로그인 / 회원가입하기</button>
+                <button class="login-prompt-skip-btn" id="loginPromptSkipBtn">괜찮아요, 계속 게스트로 사용할게요</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 툴팁 -->
     <div id="tooltip" class="tooltip"></div>
 
@@ -2308,6 +2511,8 @@
         let currentPage = 'dashboard';
         let selectedHobbyId = null;
         let isSignupMode = false;
+        let isGuestMode = false;
+        let guestPromptShown = false;
 
         // 색상 상수
         const COLORS = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
@@ -2420,6 +2625,11 @@
             if (currentUser && window.firebaseDb) {
                 await saveToFirestore();
             }
+            // 게스트 모드에서 첫 저장 시 로그인 유도 팝업
+            if (isGuestMode && !guestPromptShown) {
+                guestPromptShown = true;
+                setTimeout(() => showLoginPrompt(), 800);
+            }
         }
 
         // 로드 함수 (Firestore 우선, 로컬 백업)
@@ -2476,6 +2686,67 @@
         function hideAuthError() {
             document.getElementById('authError').style.display = 'none';
         }
+
+        // ===== 게스트 모드 =====
+
+        // 게스트 모드 시작
+        async function handleGuestMode() {
+            isGuestMode = true;
+            guestPromptShown = false;
+            currentUser = null;
+            localStorage.setItem('lifeCommitGuestMode', 'true');
+
+            // 기존 로컬 데이터 로드 또는 초기 데이터 생성
+            loadFromLocalStorage();
+            if (hobbies.length === 0) {
+                createInitialData();
+                saveToLocalStorage();
+            }
+
+            // UI 전환
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'flex';
+            document.getElementById('guestBanner').style.display = 'flex';
+            document.getElementById('userName').textContent = '게스트';
+            document.getElementById('logoutBtn').textContent = '로그인하기';
+
+            renderDashboard();
+        }
+
+        // 로그인 유도 팝업 표시
+        function showLoginPrompt() {
+            document.getElementById('loginPromptModal').style.display = 'flex';
+        }
+
+        // 로그인 유도 팝업 닫기
+        function closeLoginPrompt() {
+            document.getElementById('loginPromptModal').style.display = 'none';
+        }
+
+        // 게스트 → 로그인 페이지로 이동
+        function exitGuestModeToLogin() {
+            closeLoginPrompt();
+            // 마이그레이션 플래그 설정
+            localStorage.setItem('lifeCommitPendingMigration', 'true');
+            isGuestMode = false;
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+        }
+
+        // 게스트 배너 버튼 이벤트
+        document.getElementById('guestBannerLoginBtn').addEventListener('click', exitGuestModeToLogin);
+        document.getElementById('guestBannerDismiss').addEventListener('click', function() {
+            document.getElementById('guestBanner').style.display = 'none';
+        });
+
+        // 로그인 유도 팝업 버튼 이벤트
+        document.getElementById('loginPromptLoginBtn').addEventListener('click', exitGuestModeToLogin);
+        document.getElementById('loginPromptSkipBtn').addEventListener('click', closeLoginPrompt);
+
+        // 게스트 시작 버튼 이벤트
+        document.getElementById('guestStartBtn').addEventListener('click', handleGuestMode);
+
+        // ===== 게스트 모드 끝 =====
 
         function showAuthSuccess(message) {
             const successEl = document.getElementById('authSuccess');
@@ -2603,25 +2874,89 @@
 
         // 로그인 후 처리
         async function handleAuthSuccess(user, isNewUser = false) {
+            const wasPendingMigration = localStorage.getItem('lifeCommitPendingMigration') === 'true';
+
             currentUser = {
                 uid: user.uid,
                 email: user.email,
                 name: user.email.split('@')[0]
             };
 
-            document.getElementById('userName').textContent = currentUser.name;
+            // 게스트 모드 플래그 초기화
+            isGuestMode = false;
+            localStorage.removeItem('lifeCommitGuestMode');
+            localStorage.removeItem('lifeCommitPendingMigration');
 
-            // 데이터 로드 또는 초기화
-            await loadFromStorage();
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('logoutBtn').textContent = '로그아웃';
+            document.getElementById('guestBanner').style.display = 'none';
 
             if (isNewUser) {
-                createInitialData();
-                await saveToStorage();
+                // 신규 가입 + 게스트 데이터가 있으면 자동 마이그레이션
+                if (wasPendingMigration) {
+                    loadFromLocalStorage();
+                    if (hobbies.length > 0) {
+                        await saveToStorage();
+                    } else {
+                        createInitialData();
+                        await saveToStorage();
+                    }
+                } else {
+                    createInitialData();
+                    await saveToStorage();
+                }
+            } else {
+                // 기존 유저 로그인
+                await loadFromStorage();
+
+                // 게스트 데이터가 있고 Firestore가 비어 있으면 마이그레이션 배너 표시
+                if (wasPendingMigration) {
+                    const localData = localStorage.getItem('lifeCommitData');
+                    const parsed = localData ? JSON.parse(localData) : null;
+                    const hasLocalData = parsed && parsed.hobbies && parsed.hobbies.length > 0;
+                    const hasCloudData = hobbies.length > 0;
+
+                    if (hasLocalData && !hasCloudData) {
+                        // 클라우드가 비어 있으면 자동 마이그레이션
+                        loadFromLocalStorage();
+                        await saveToStorage();
+                    } else if (hasLocalData && hasCloudData) {
+                        // 둘 다 있으면 선택 배너 표시
+                        showMigrateBanner(parsed);
+                    }
+                }
             }
 
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainApp').style.display = 'flex';
             renderDashboard();
+        }
+
+        // 마이그레이션 선택 배너 표시
+        function showMigrateBanner(localParsed) {
+            const banner = document.getElementById('migrateBanner');
+            banner.innerHTML = `
+                <div class="migrate-banner">
+                    <div class="migrate-banner-text">
+                        <strong>기기에 저장된 게스트 데이터가 있습니다</strong>
+                        게스트로 기록한 데이터를 현재 계정으로 가져오시겠습니까? (기존 클라우드 데이터는 유지됩니다)
+                    </div>
+                    <button class="migrate-yes-btn" id="migrateYesBtn">가져오기</button>
+                    <button class="migrate-no-btn" id="migrateNoBtn">무시</button>
+                </div>
+            `;
+            banner.style.display = 'block';
+
+            document.getElementById('migrateYesBtn').addEventListener('click', async function() {
+                hobbies = localParsed.hobbies || [];
+                records = localParsed.records || [];
+                await saveToStorage();
+                banner.style.display = 'none';
+                renderDashboard();
+            });
+            document.getElementById('migrateNoBtn').addEventListener('click', function() {
+                banner.style.display = 'none';
+            });
         }
 
         // 로그인 처리
@@ -2668,6 +3003,12 @@
 
         // 로그아웃
         document.getElementById('logoutBtn').addEventListener('click', async function() {
+            // 게스트 모드에서는 "로그인하기" 버튼으로 동작
+            if (isGuestMode) {
+                exitGuestModeToLogin();
+                return;
+            }
+
             if (confirm('로그아웃 하시겠습니까?')) {
                 try {
                     if (window.firebaseAuth && window.firebaseAuthFunctions) {
@@ -3728,9 +4069,14 @@
                 } else {
                     // 사용자가 로그아웃된 상태
                     console.log('인증 상태: 로그아웃됨');
-                    currentUser = null;
-                    document.getElementById('mainApp').style.display = 'none';
-                    document.getElementById('loginPage').style.display = 'flex';
+                    // 게스트 모드 세션이 있으면 복원
+                    if (localStorage.getItem('lifeCommitGuestMode') === 'true') {
+                        await handleGuestMode();
+                    } else {
+                        currentUser = null;
+                        document.getElementById('mainApp').style.display = 'none';
+                        document.getElementById('loginPage').style.display = 'flex';
+                    }
                 }
             });
         }
