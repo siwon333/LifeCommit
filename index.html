@@ -2804,7 +2804,7 @@
             localStorage.setItem('lifeCommitPendingMigration', 'true');
             isGuestMode = false;
             document.getElementById('mainApp').style.display = 'none';
-            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('loginPage').style.display = 'block';
             // 로그인 모달 자동 열기
             document.getElementById('authModal').style.display = 'flex';
         }
@@ -3111,7 +3111,7 @@
                     records = [];
 
                     document.getElementById('mainApp').style.display = 'none';
-                    document.getElementById('loginPage').style.display = 'flex';
+                    document.getElementById('loginPage').style.display = 'block';
 
                     // 폼 초기화
                     document.getElementById('loginForm').reset();
@@ -4165,7 +4165,7 @@
                     } else {
                         currentUser = null;
                         document.getElementById('mainApp').style.display = 'none';
-                        document.getElementById('loginPage').style.display = 'flex';
+                        document.getElementById('loginPage').style.display = 'block';
                     }
                 }
             });
