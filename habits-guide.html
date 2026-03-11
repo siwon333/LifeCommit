@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>습관 만드는 방법: 작심삼일 없이 꾸준히 하는 7가지 전략 | Life Commit</title>
+    <meta name="description" content="습관 만드는 방법을 과학적으로 알아보세요. 작심삼일 없이 운동, 독서, 공부 습관을 꾸준히 유지하는 7가지 전략과 습관 형성의 심리학을 정리했습니다.">
+    <meta name="keywords" content="습관 만드는 방법, 습관 형성, 작심삼일 극복, 루틴 만들기, 꾸준히 하는 법, 좋은 습관, 습관 유지">
+    <meta property="og:title" content="습관 만드는 방법: 작심삼일 없이 꾸준히 하는 7가지 전략">
+    <meta property="og:description" content="습관 형성의 과학과 실전 전략. 운동, 독서, 공부 등 어떤 습관이든 꾸준히 지속하는 방법을 알아보세요.">
+    <meta property="og:type" content="article">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6296484832176167"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 40px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--success);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .page-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 40px;
+            text-align: center;
+        }
+
+        .page-header .category {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.4;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header .lead {
+            color: var(--text-secondary);
+            font-size: 17px;
+            max-width: 640px;
+            margin: 0 auto 20px;
+        }
+
+        .page-header .meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .layout {
+            display: flex;
+            gap: 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 56px 40px;
+        }
+
+        .toc {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .toc-sticky {
+            position: sticky;
+            top: 80px;
+        }
+
+        .toc h3 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            line-height: 1.5;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent);
+            background: var(--bg-secondary);
+        }
+
+        .article {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .article h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin: 56px 0 16px;
+            scroll-margin-top: 80px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article h2:first-child { margin-top: 0; }
+
+        .article h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 32px 0 12px;
+            color: var(--accent);
+        }
+
+        .article p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            line-height: 1.9;
+        }
+
+        .article ul, .article ol {
+            color: var(--text-secondary);
+            padding-left: 24px;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        .article li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .article strong {
+            color: var(--text-primary);
+        }
+
+        .highlight-box {
+            background: rgba(88, 166, 255, 0.07);
+            border: 1px solid rgba(88, 166, 255, 0.25);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .success-box {
+            background: rgba(63, 185, 80, 0.07);
+            border: 1px solid rgba(63, 185, 80, 0.25);
+            border-left: 4px solid var(--success);
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .success-box p { margin: 0; color: var(--text-secondary); font-size: 15px; }
+
+        .warning-box {
+            background: rgba(210, 153, 34, 0.07);
+            border: 1px solid rgba(210, 153, 34, 0.25);
+            border-left: 4px solid var(--warning);
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .warning-box p { margin: 0; color: var(--text-secondary); font-size: 15px; }
+
+        .strategy-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+            transition: border-color 0.2s;
+        }
+
+        .strategy-card:hover { border-color: var(--accent); }
+
+        .strategy-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .strategy-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: #0d1117;
+            font-weight: 700;
+            border-radius: 50%;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .strategy-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .strategy-card p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .example-box strong { color: var(--success); }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .data-table td {
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(63, 185, 80, 0.1), rgba(88, 166, 255, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin: 48px 0 0;
+        }
+
+        .cta-box h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .cta-box p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--success);
+            color: #0d1117;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            transition: opacity 0.2s;
+        }
+
+        .cta-btn:hover { opacity: 0.85; }
+
+        .related-links {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .related-links h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .related-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+
+        .related-card:hover { border-color: var(--accent); }
+
+        .related-card .label {
+            font-size: 11px;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .related-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 32px 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: var(--text-muted); font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 20px; }
+            .nav-links { gap: 16px; }
+            .page-header { padding: 40px 20px; }
+            .page-header h1 { font-size: 26px; }
+            .layout { flex-direction: column; padding: 32px 20px; gap: 32px; }
+            .toc { width: 100%; }
+            .toc-sticky { position: static; }
+            .related-grid { grid-template-columns: 1fr; }
+            footer { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">🌱 Life Commit</a>
+        <div class="nav-links">
+            <a href="index.html">홈</a>
+            <a href="about.html">서비스 소개</a>
+            <a href="guide.html">사용 가이드</a>
+            <a href="habits-guide.html">습관 가이드</a>
+            <a href="habit-tracker-tips.html">트래커 활용법</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <span class="category">습관 형성 가이드</span>
+        <h1>습관 만드는 방법: 작심삼일 없이 꾸준히 하는 7가지 전략</h1>
+        <p class="lead">왜 어떤 사람은 작심삼일로 끝나고, 어떤 사람은 수년간 습관을 유지할까요? 습관 형성의 과학과 실전 전략을 정리했습니다.</p>
+        <span class="meta">📅 2026년 3월 · ⏱ 읽는 시간 약 8분</span>
+    </div>
+
+    <div class="layout">
+        <aside class="toc">
+            <div class="toc-sticky">
+                <h3>목차</h3>
+                <ul class="toc-list">
+                    <li><a href="#science">습관 형성의 과학</a></li>
+                    <li><a href="#why-fail">작심삼일이 되는 이유</a></li>
+                    <li><a href="#strategy1">전략 1: 목표를 작게</a></li>
+                    <li><a href="#strategy2">전략 2: 기존 루틴에 연결</a></li>
+                    <li><a href="#strategy3">전략 3: 환경 설계</a></li>
+                    <li><a href="#strategy4">전략 4: 즉각적 보상</a></li>
+                    <li><a href="#strategy5">전략 5: 시각화 기록</a></li>
+                    <li><a href="#strategy6">전략 6: 빠진 날 대처법</a></li>
+                    <li><a href="#strategy7">전략 7: 정체성 기반</a></li>
+                    <li><a href="#habit-examples">습관 유형별 전략</a></li>
+                    <li><a href="#faq">자주 묻는 질문</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <article class="article">
+
+            <h2 id="science">습관 형성의 과학: 뇌가 습관을 만드는 방식</h2>
+            <p>습관은 뇌의 <strong>기저핵(basal ganglia)</strong>이라는 부위에서 처리됩니다. 처음에는 의식적으로 결정해야 하는 행동이 반복되면, 뇌가 이를 자동화된 루틴으로 저장합니다. 이것이 습관의 본질입니다.</p>
+            <p>MIT 연구팀이 발견한 <strong>"습관 고리(habit loop)"</strong>는 세 가지로 구성됩니다.</p>
+            <ul>
+                <li><strong>신호(Cue)</strong> — 습관을 촉발하는 트리거. 특정 시간, 장소, 감정, 사람, 직전 행동이 될 수 있습니다.</li>
+                <li><strong>루틴(Routine)</strong> — 실제로 수행하는 행동. 우리가 만들고 싶은 습관 자체입니다.</li>
+                <li><strong>보상(Reward)</strong> — 뇌가 이 고리를 기억하게 만드는 만족감. 도파민이 분비됩니다.</li>
+            </ul>
+            <div class="highlight-box">
+                <p>💡 <strong>핵심 원리:</strong> 습관을 바꾸거나 만들려면 "신호"와 "보상"을 설계하는 것이 행동 자체를 의지력으로 반복하는 것보다 훨씬 효과적입니다.</p>
+            </div>
+            <p>유니버시티 칼리지 런던의 필리파 랠리(Phillippa Lally) 연구에 따르면 새로운 습관이 자동화되기까지 평균 <strong>66일</strong>이 걸립니다. "21일이면 습관이 된다"는 이야기는 사실이 아닙니다. 습관의 복잡성에 따라 18일~254일까지 차이가 납니다.</p>
+
+            <h2 id="why-fail">작심삼일이 되는 이유</h2>
+            <p>새해 결심의 80%가 2월 안에 사라진다는 연구 결과가 있습니다. 왜 우리는 작심삼일로 끝날까요? 가장 흔한 원인들입니다.</p>
+            <ul>
+                <li><strong>목표가 너무 크다</strong> — "매일 1시간 운동"처럼 평소보다 급격히 높은 목표를 설정합니다. 처음 며칠은 가능하지만 지속하기 어렵습니다.</li>
+                <li><strong>의지력에만 의존한다</strong> — 의지력은 유한한 자원입니다. 하루 종일 결정을 내리다 보면 저녁에는 의지력이 고갈됩니다(결정 피로).</li>
+                <li><strong>환경이 바뀌지 않았다</strong> — 행동을 바꾸려면 그 행동을 유발하는 환경도 함께 바꿔야 합니다.</li>
+                <li><strong>보상이 너무 느리다</strong> — 운동의 결과(체중 감량, 건강 향상)는 수개월 후에야 나타납니다. 뇌는 즉각적인 보상에 반응합니다.</li>
+                <li><strong>하루 빠지면 포기한다</strong> — "이미 망했다"는 전부 아니면 전무 사고방식이 습관 형성을 방해합니다.</li>
+            </ul>
+            <div class="warning-box">
+                <p>⚠️ <strong>흔한 오해:</strong> "동기 부여가 충분하면 할 수 있다." 동기 부여는 시작을 돕지만 지속성은 시스템이 만듭니다. 동기에 의존하지 말고 구조를 설계하세요.</p>
+            </div>
+
+            <h2 id="strategy1">전략 1: 목표를 불편할 정도로 작게 만들어라</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">1</div>
+                    <h3>최소 가능 행동(Minimum Viable Habit) 설정</h3>
+                </div>
+                <p>습관 형성의 첫 번째 목표는 "좋은 결과를 내는 것"이 아니라 <strong>"하는 사람이 되는 것"</strong>입니다. 처음에는 너무 작아서 실패할 수 없는 수준으로 시작하세요.</p>
+                <div class="example-box">
+                    <strong>예시:</strong><br>
+                    ❌ "매일 30분 달리기" → ✅ "운동화 신기" 또는 "5분 걷기"<br>
+                    ❌ "매일 책 50페이지 읽기" → ✅ "매일 책 2페이지 읽기"<br>
+                    ❌ "매일 1시간 공부" → ✅ "매일 책상에 앉아 5분"
+                </div>
+            </div>
+            <p>작은 목표가 효과적인 이유는 두 가지입니다. 첫째, 달성 성공 경험이 쌓이면 뇌가 긍정적인 피드백을 받아 습관 고리가 강화됩니다. 둘째, 실제로 시작하면 자연스럽게 더 오래 하게 됩니다. "딱 2페이지만"이라고 시작했다가 10페이지를 읽는 경우가 많습니다.</p>
+
+            <h2 id="strategy2">전략 2: 기존 루틴에 새 습관을 연결하라 (습관 쌓기)</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">2</div>
+                    <h3>습관 쌓기(Habit Stacking)</h3>
+                </div>
+                <p>뇌는 이미 자동화된 행동과 새 행동을 묶으면 새 행동을 더 쉽게 기억합니다. "X를 한 후에 Y를 한다" 형식으로 연결하세요.</p>
+                <div class="example-box">
+                    <strong>공식:</strong> "[현재 습관]을 한 후, [새로운 습관]을 한다."<br><br>
+                    <strong>예시:</strong><br>
+                    • 아침 커피를 마신 후 → 10분 독서<br>
+                    • 점심 식사 후 → 5분 영단어 암기<br>
+                    • 양치질 후 → 팔굽혀펴기 10개<br>
+                    • 저녁 식사 후 → Life Commit에 오늘 기록
+                </div>
+            </div>
+            <p>기존 습관을 신호(Cue)로 활용하면 "언제 할까?"를 고민할 필요가 없어집니다. 또한 기존 루틴이 새 습관을 자동으로 떠올리게 해줍니다.</p>
+
+            <h2 id="strategy3">전략 3: 환경을 설계하라</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">3</div>
+                    <h3>마찰을 줄이고, 장벽을 높여라</h3>
+                </div>
+                <p>사람은 쉬운 것을 선택합니다. 좋은 습관은 시작하기 쉽게, 나쁜 습관은 시작하기 어렵게 환경을 설계하세요.</p>
+                <div class="example-box">
+                    <strong>좋은 습관 시작을 쉽게:</strong><br>
+                    • 운동화를 침대 옆에 놓기 (운동 습관)<br>
+                    • 책을 소파 위에 펼쳐두기 (독서 습관)<br>
+                    • 물병을 책상 위에 올려두기 (수분 보충 습관)<br>
+                    • Life Commit 앱을 홈 화면 첫 번째에 배치 (기록 습관)<br><br>
+                    <strong>나쁜 습관 시작을 어렵게:</strong><br>
+                    • 스마트폰을 침실 밖에 두기 (수면 전 스마트폰 사용 줄이기)<br>
+                    • 과자를 눈에 안 보이는 곳에 보관 (간식 줄이기)
+                </div>
+            </div>
+            <p>스탠퍼드 대학의 BJ 포그 교수는 이를 <strong>"작은 습관(Tiny Habits)"</strong> 이론으로 발전시켰습니다. 환경이 행동을 촉발하므로, 환경을 바꾸면 의지력 없이도 행동이 바뀝니다.</p>
+
+            <h2 id="strategy4">전략 4: 즉각적인 보상을 설계하라</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">4</div>
+                    <h3>보상의 즉시성(Immediacy of Reward)</h3>
+                </div>
+                <p>인간의 뇌는 미래의 큰 보상보다 현재의 작은 보상에 더 강하게 반응합니다. 운동의 건강 효과는 수개월 후에 나타나지만, 습관을 유지하려면 오늘 당장 보상이 있어야 합니다.</p>
+                <div class="example-box">
+                    <strong>즉각적 보상 설계 예시:</strong><br>
+                    • 운동 후 좋아하는 팟캐스트 듣기<br>
+                    • 독서 후 커피 한 잔 마시기<br>
+                    • 목표 달성 후 잔디밭에 커밋 기록하며 성취감 느끼기<br>
+                    • 스트릭(연속 기록) 유지 확인하기
+                </div>
+            </div>
+            <p><strong>잔디밭 시각화</strong>가 습관 트래커에서 효과적인 이유가 바로 즉각적 보상 때문입니다. 운동을 한 날 잔디가 초록으로 채워지는 것은 작지만 즉각적인 시각적 보상입니다. 이 작은 도파민이 다음 날도 하게 만드는 동력이 됩니다.</p>
+
+            <h2 id="strategy5">전략 5: 기록하고 시각화하라</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">5</div>
+                    <h3>진행도 추적(Progress Tracking)의 힘</h3>
+                </div>
+                <p>달성 현황을 기록하고 시각화하면 습관 유지율이 크게 올라갑니다. 이를 <strong>"퍼블릭 트래킹 효과"</strong> 또는 <strong>"엔도우먼트 효과(Endowment Effect)"</strong>라고 합니다. 쌓아온 기록을 잃고 싶지 않은 심리가 작동합니다.</p>
+                <div class="example-box">
+                    <strong>기록의 효과:</strong><br>
+                    • 연속 기록(스트릭) — "오늘까지 30일 연속이니 끊기 싫다"<br>
+                    • 시각적 진행도 — 초록 잔디가 늘어나는 게 보이면 계속하고 싶어짐<br>
+                    • 데이터 기반 피드백 — "이번 달 달성률 78%"처럼 구체적 수치로 확인
+                </div>
+            </div>
+            <p>종이 달력에 X표를 치는 "X 체인 전략"(제리 사인펠드가 사용한 방법)도 같은 원리입니다. Life Commit의 잔디밭은 이 방법을 디지털로 구현한 것입니다.</p>
+
+            <h2 id="strategy6">전략 6: 빠진 날을 대처하는 방법</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">6</div>
+                    <h3>"절대 두 번 연속 빠지지 않기" 규칙</h3>
+                </div>
+                <p>하루 빠지는 것은 실수입니다. 두 번 연속 빠지는 것은 새로운 습관(안 하는 습관)의 시작입니다. 한 번 빠진 날은 인정하고, 다음 날 반드시 재개하세요.</p>
+                <div class="example-box">
+                    <strong>빠진 날 대처 마인드셋:</strong><br>
+                    • ❌ "이미 망했다. 다음 달부터 다시 하자" — 작심삼일 패턴<br>
+                    • ✅ "오늘 하루 빠졌다. 내일은 반드시 한다" — 회복력 있는 습관<br><br>
+                    <strong>중요:</strong> 완벽한 100%보다 80%의 꾸준함이 훨씬 더 큰 결과를 만듭니다.
+                </div>
+            </div>
+            <p>연구에 따르면 하루 빠진 것은 장기적인 습관 형성에 통계적으로 유의미한 영향을 주지 않습니다. 중요한 것은 전체적인 패턴이지, 하루의 실패가 아닙니다.</p>
+
+            <h2 id="strategy7">전략 7: 정체성 기반 습관 만들기</h2>
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-num">7</div>
+                    <h3>행동이 아닌 정체성에 집중하라</h3>
+                </div>
+                <p>제임스 클리어의 『아주 작은 습관의 힘(Atomic Habits)』에서 강조하는 핵심입니다. 결과 중심 목표 대신 정체성 중심 목표로 전환하세요.</p>
+                <div class="example-box">
+                    <strong>결과 중심 vs. 정체성 중심:</strong><br>
+                    ❌ "10kg을 빼고 싶다" → ✅ "나는 건강한 사람이다"<br>
+                    ❌ "책 12권을 읽고 싶다" → ✅ "나는 독서하는 사람이다"<br>
+                    ❌ "영어를 잘 하고 싶다" → ✅ "나는 영어를 공부하는 사람이다"
+                </div>
+            </div>
+            <p>매번 습관을 실행할 때마다 자신이 원하는 정체성에 한 표를 던지는 것입니다. 하루에 2페이지를 읽는 것도 "독서하는 사람"이라는 정체성에 투표하는 행위입니다. 충분히 많은 투표가 쌓이면 그것이 진짜 정체성이 됩니다.</p>
+
+            <h2 id="habit-examples">습관 유형별 실전 전략</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>습관 유형</th>
+                        <th>추천 최소 목표</th>
+                        <th>신호(Cue) 예시</th>
+                        <th>즉각적 보상</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>운동</strong></td>
+                        <td>5~10분 걷기</td>
+                        <td>기상 직후, 점심 식사 후</td>
+                        <td>좋아하는 음악/팟캐스트</td>
+                    </tr>
+                    <tr>
+                        <td><strong>독서</strong></td>
+                        <td>2~5페이지</td>
+                        <td>커피 마실 때, 취침 전</td>
+                        <td>책갈피 이동 + 기록</td>
+                    </tr>
+                    <tr>
+                        <td><strong>외국어 공부</strong></td>
+                        <td>단어 5개</td>
+                        <td>통근 시간, 점심 후</td>
+                        <td>앱 스트릭 유지</td>
+                    </tr>
+                    <tr>
+                        <td><strong>명상</strong></td>
+                        <td>1~3분</td>
+                        <td>기상 직후, 취침 전</td>
+                        <td>잔디밭 체크</td>
+                    </tr>
+                    <tr>
+                        <td><strong>일기/글쓰기</strong></td>
+                        <td>문장 3줄</td>
+                        <td>취침 전 30분</td>
+                        <td>오늘 좋은 일 회상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>수분 섭취</strong></td>
+                        <td>하루 4잔</td>
+                        <td>식사마다 물 1잔</td>
+                        <td>물병 눈에 띄게 배치</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="faq">자주 묻는 질문</h2>
+
+            <h3>Q. 습관이 만들어지는 데 정확히 얼마나 걸리나요?</h3>
+            <p>평균 66일이지만 개인차가 큽니다. 간단한 습관(물 한 잔 마시기)은 20일 이내에, 복잡한 습관(매일 운동)은 3~6개월이 걸릴 수 있습니다. 기간보다 중요한 것은 꾸준히 반복하는 것입니다.</p>
+
+            <h3>Q. 여러 개의 새 습관을 동시에 시작해도 될까요?</h3>
+            <p>권장하지 않습니다. 한 번에 1~2개에 집중하세요. 뇌의 의지력과 집중력에는 한계가 있어, 여러 습관을 동시에 만들려 하면 모두 실패할 가능성이 높습니다. 하나를 완전히 자동화시킨 후 다음 습관을 추가하세요.</p>
+
+            <h3>Q. 습관 트래커를 쓰면 정말 효과가 있나요?</h3>
+            <p>네, 명확한 효과가 있습니다. 달성 현황을 기록하고 시각화하면 책임감이 생기고, 연속 기록이 동기를 부여합니다. 특히 GitHub 잔디밭 같은 시각적 표현은 장기적인 패턴을 한눈에 볼 수 있어 자기 이해에도 도움이 됩니다.</p>
+
+            <h3>Q. 나쁜 습관을 끊는 방법도 같은 원리인가요?</h3>
+            <p>비슷하지만 반대 방향입니다. 나쁜 습관의 신호를 제거하거나(핸드폰을 눈에 안 보이는 곳에), 루틴의 마찰을 높이거나(담배를 사러 가는 길을 어렵게), 보상을 없애는 방식으로 접근합니다. 단순히 "안 하겠다"는 의지보다 환경을 바꾸는 게 더 효과적입니다.</p>
+
+            <h3>Q. 스트릭이 끊기면 처음부터 다시 해야 하나요?</h3>
+            <p>아닙니다. 스트릭은 동기 부여 도구이지, 절대적인 목표가 아닙니다. 하루 빠진 것은 습관 형성 전체에 미치는 영향이 미미합니다. 다음 날부터 다시 기록을 이어가세요. 전체 달성률과 장기적인 패턴이 훨씬 중요합니다.</p>
+
+            <div class="success-box">
+                <p>✅ <strong>핵심 요약:</strong> 작게 시작하고, 기존 루틴에 연결하고, 환경을 설계하고, 즉각적 보상을 만들고, 기록으로 시각화하고, 빠진 날을 두려워하지 말고, 정체성 중심으로 생각하세요. 이 7가지 전략을 하나씩 적용하면 어떤 습관이든 만들 수 있습니다.</p>
+            </div>
+
+            <div class="cta-box">
+                <h3>오늘부터 습관을 기록해보세요</h3>
+                <p>Life Commit으로 매일의 습관을 커밋하고, GitHub 잔디밭처럼 시각화해보세요. 무료로 시작할 수 있습니다.</p>
+                <a href="index.html" class="cta-btn">무료로 시작하기 →</a>
+            </div>
+
+            <div class="related-links">
+                <h3>관련 글</h3>
+                <div class="related-grid">
+                    <a href="habit-tracker-tips.html" class="related-card">
+                        <div class="label">활용 가이드</div>
+                        <h4>습관 트래커 200% 활용법: 목표 달성률을 높이는 실전 전략</h4>
+                    </a>
+                    <a href="guide.html" class="related-card">
+                        <div class="label">사용 가이드</div>
+                        <h4>Life Commit 사용 가이드: 잔디밭 채우기부터 통계 분석까지</h4>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="about.html">서비스 소개</a>
+            <a href="guide.html">사용 가이드</a>
+            <a href="habits-guide.html">습관 가이드</a>
+            <a href="habit-tracker-tips.html">트래커 활용법</a>
+            <a href="privacy-policy.html">개인정보처리방침</a>
+        </div>
+        <div class="footer-copy">© 2026 Life Commit. 당신의 하루를 커밋하세요.</div>
+    </footer>
+</body>
+</html>
