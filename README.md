@@ -81,8 +81,6 @@ LifeCommit/
 ├── screenshots.png                   # 앱 스크린샷 (README용)
 ├── ads.txt                           # Google AdSense 인증 파일
 │
-├── Life_Commit_Final_Specification.md # 전체 기능 및 UI 상세 명세서
-│
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml                # GitHub Pages 자동 배포 워크플로우
