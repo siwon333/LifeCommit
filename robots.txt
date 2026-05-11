@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /index.html
 
 Sitemap: https://lifecommit.store/sitemap.xml
