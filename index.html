@@ -1842,6 +1842,318 @@
             }
         }
 
+        /* ── Pages / BuJo ── */
+        .pages-nav-section {
+            padding: 0 12px;
+            margin-top: 8px;
+        }
+        .pages-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .pages-nav-header:hover { background: var(--bg-tertiary); }
+        .pages-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 2px 0 8px;
+        }
+        .pages-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pages-nav-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .pages-nav-item.active { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; }
+        .pages-nav-add {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pages-nav-add:hover { color: var(--accent); background: var(--bg-tertiary); }
+
+        /* Pages 목록 */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .page-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .page-card-icon { font-size: 32px; margin-bottom: 12px; }
+        .page-card-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .page-card-meta { font-size: 12px; color: var(--text-muted); }
+        .page-card-add {
+            background: transparent;
+            border: 2px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            min-height: 140px;
+            transition: all 0.2s;
+        }
+        .page-card-add:hover { border-color: var(--accent); color: var(--accent); }
+        .page-card-add-icon { font-size: 28px; }
+
+        /* Page 상세 — 스프레드 */
+        .spread-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .spread-date-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .spread-date-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+        }
+        .spread-date-btn:hover { background: var(--border); }
+        .spread-date-label {
+            font-size: 16px;
+            font-weight: 700;
+            min-width: 130px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .spread-actions { display: flex; gap: 8px; }
+
+        /* 스프레드 그리드 */
+        .spread-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 768px) { .spread-grid { grid-template-columns: 1fr; } }
+
+        /* 모듈 카드 */
+        .module-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .module-card:hover { border-color: var(--text-muted); }
+        .module-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .module-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .module-type-badge {
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .badge-habit  { background: rgba(63,185,80,0.15);  color: var(--success); }
+        .badge-mood   { background: rgba(248,161,73,0.15); color: #f8a149; }
+        .badge-log    { background: rgba(88,166,255,0.15); color: var(--accent); }
+        .badge-journal{ background: rgba(150,150,180,0.15);color: #9696b4; }
+        .module-card-body { padding: 16px; }
+
+        /* Habit 모듈 */
+        .module-habit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .module-habit-meta { font-size: 12px; color: var(--text-muted); }
+        .module-habit-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+        .status-done     { background: rgba(63,185,80,0.15);  color: var(--success); }
+        .status-exceeded { background: rgba(248,161,73,0.15); color: #f8a149; }
+        .status-pending  { background: var(--bg-tertiary); color: var(--text-muted); }
+
+        /* Mood 모듈 */
+        .mood-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            padding: 4px 0;
+        }
+        .mood-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--bg-tertiary);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        .mood-btn:hover { border-color: var(--accent); transform: scale(1.15); }
+        .mood-btn.selected { border-color: #f8a149; background: rgba(248,161,73,0.15); transform: scale(1.15); }
+        .mood-label {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Log 모듈 */
+        .log-display {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .log-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .log-unit { font-size: 14px; color: var(--text-secondary); }
+        .log-target { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .log-progress {
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .log-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; }
+
+        /* Journal 모듈 */
+        .journal-textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-family: 'Noto Sans KR', sans-serif;
+            resize: vertical;
+            line-height: 1.7;
+            transition: border-color 0.2s;
+        }
+        .journal-textarea:focus { outline: none; border-color: var(--accent); }
+        .journal-textarea::placeholder { color: var(--text-muted); }
+        .journal-save-btn {
+            margin-top: 8px;
+            padding: 6px 14px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: none;
+        }
+        .journal-save-btn:hover { opacity: 0.85; }
+
+        /* 모듈 추가 카드 */
+        .module-add-card {
+            background: transparent;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 140px;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .module-add-card:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* 모달 — 모듈 타입 선택 */
+        .module-type-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .module-type-option {
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .module-type-option:hover { border-color: var(--accent); }
+        .module-type-option.selected { border-color: var(--accent); background: rgba(88,166,255,0.1); }
+        .module-type-option-icon { font-size: 28px; margin-bottom: 6px; }
+        .module-type-option-name { font-size: 13px; font-weight: 600; }
+        .module-type-option-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
         /* 툴팁 */
         .tooltip {
             position: fixed;
@@ -2157,13 +2469,13 @@
         <!-- 히어로 섹션 (중앙 정렬) -->
         <div class="landing-hero">
             <div class="landing-content">
-                <div class="landing-badge">✨ GitHub 잔디밭 스타일 습관 트래커</div>
+                <div class="landing-badge">✨ 나만의 흔적을 기록하는 습관 트래커</div>
                 <h1 class="landing-title">
-                    당신의 하루를<br><span class="highlight">커밋하세요</span>
+                    Commit your life.<br><span class="highlight">Leave your trace.</span>
                 </h1>
                 <p class="landing-subtitle">
-                    매일의 작은 성취를 "커밋"으로 기록하고, 연간 달성 패턴을 한눈에 시각화하세요.
-                    꾸준함이 쌓여 만들어지는 초록빛 잔디를 함께 만들어 보세요.
+                    매일의 작은 성취를 commit으로 기록하고, 1년간의 trace를 한눈에 시각화하세요.
+                    오늘의 commit이 내일의 trace가 됩니다.
                 </p>
                 <div class="landing-cta-group">
                     <button class="btn btn-primary landing-cta-btn" id="openAuthModalBtn">🚀 시작하기 / 로그인</button>
@@ -2177,8 +2489,8 @@
                     <div class="landing-feature-item">
                         <div class="landing-feature-icon">🌱</div>
                         <div class="landing-feature-text">
-                            <h4>GitHub 스타일 잔디밭</h4>
-                            <p>연간 365일 달성 현황을 잔디밭 그래프로 시각화합니다.</p>
+                            <h4>Trace Map</h4>
+                            <p>연간 365일 달성 현황을 Trace Map으로 한눈에 시각화합니다.</p>
                         </div>
                     </div>
                     <div class="landing-feature-item">
@@ -2191,8 +2503,8 @@
                     <div class="landing-feature-item">
                         <div class="landing-feature-icon">📊</div>
                         <div class="landing-feature-text">
-                            <h4>상세한 통계 분석</h4>
-                            <p>달성률, 연속 기록(스트릭), 취미별 통계를 한눈에 확인하세요.</p>
+                            <h4>Insights</h4>
+                            <p>달성률, 연속 기록(Flow), Track별 통계를 한눈에 확인하세요.</p>
                         </div>
                     </div>
                     <div class="landing-feature-item">
@@ -2212,7 +2524,7 @@
                 <button class="auth-modal-close" id="closeAuthModalBtn" type="button">✕</button>
                 <div class="login-header">
                     <div class="login-logo">🌱 Life Commit</div>
-                    <div class="login-tagline">당신의 하루를 커밋하세요</div>
+                    <div class="login-tagline">Commit your life. Every day leaves a trace.</div>
                 </div>
                 <form class="login-form" id="loginForm">
                     <div class="form-group">
@@ -2244,31 +2556,31 @@
         <!-- 이용 방법 섹션 -->
         <section class="landing-section">
             <h2 class="landing-section-title">어떻게 사용하나요?</h2>
-            <p class="landing-section-subtitle">3단계로 시작하는 나만의 습관 트래커</p>
+            <p class="landing-section-subtitle">4단계로 시작하는 나만의 Trace</p>
             <div class="how-it-works-grid">
                 <div class="how-step">
                     <span class="how-step-number">1</span>
                     <span class="how-step-icon">✍️</span>
-                    <h3>습관 목표 설정</h3>
-                    <p>운동, 독서, 명상 등 원하는 습관을 추가하고 목표 수치(시간, 횟수, 페이지 등)를 설정하세요.</p>
+                    <h3>Track 설정</h3>
+                    <p>운동, 독서, 명상 등 원하는 Track을 추가하고 목표 수치(시간, 횟수, 페이지 등)를 설정하세요.</p>
                 </div>
                 <div class="how-step">
                     <span class="how-step-number">2</span>
                     <span class="how-step-icon">✅</span>
-                    <h3>매일 기록</h3>
-                    <p>오늘의 달성 현황을 클릭 한 번으로 체크하거나 수치를 입력하세요. 간단할수록 꾸준히 할 수 있습니다.</p>
+                    <h3>매일 Commit</h3>
+                    <p>오늘의 달성 현황을 클릭 한 번으로 commit하세요. 간단할수록 꾸준히 할 수 있습니다.</p>
                 </div>
                 <div class="how-step">
                     <span class="how-step-number">3</span>
                     <span class="how-step-icon">🌱</span>
-                    <h3>잔디 성장 확인</h3>
-                    <p>매일 채워지는 잔디밭과 통계를 통해 성취감을 느끼고 꾸준함을 유지하세요.</p>
+                    <h3>Trace 확인</h3>
+                    <p>매일 쌓이는 Trace Map을 통해 성취감을 느끼고 꾸준함을 유지하세요.</p>
                 </div>
                 <div class="how-step">
                     <span class="how-step-number">4</span>
                     <span class="how-step-icon">📈</span>
-                    <h3>성과 분석</h3>
-                    <p>연간 달성률, 최장 연속 기록, 취미별 통계로 자신의 성장을 데이터로 확인하세요.</p>
+                    <h3>Insights</h3>
+                    <p>연간 달성률, 최장 Flow, Track별 통계로 자신의 성장을 데이터로 확인하세요.</p>
                 </div>
             </div>
         </section>
@@ -2276,13 +2588,13 @@
         <!-- 장점 섹션 -->
         <section class="landing-section">
             <h2 class="landing-section-title">왜 Life Commit인가요?</h2>
-            <p class="landing-section-subtitle">습관 형성을 위해 설계된 스마트한 도구</p>
+            <p class="landing-section-subtitle">당신의 trace를 쌓아가는 가장 스마트한 방법</p>
             <div class="benefit-list">
                 <div class="benefit-item">
                     <div class="benefit-icon">🎨</div>
                     <div>
                         <h3>시각적 동기 부여</h3>
-                        <p>GitHub 개발자들이 잔디밭을 채우며 느끼는 성취감을 일상 습관에도 적용했습니다. 초록색 잔디가 채워질수록 더 하고 싶어집니다.</p>
+                        <p>매일의 commit이 쌓여 Trace Map을 채워갑니다. 빈 칸을 채우고 싶은 충동, Flow를 이어가고 싶은 욕구 — 바로 그 심리가 꾸준함을 만듭니다.</p>
                     </div>
                 </div>
                 <div class="benefit-item">
@@ -2333,16 +2645,16 @@
                     <div class="faq-answer">네, Life Commit은 완전 무료 서비스입니다. 회원가입 후 모든 기능을 제한 없이 이용할 수 있습니다.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Q. 습관(취미)은 몇 개까지 추가할 수 있나요?</div>
-                    <div class="faq-answer">제한 없이 원하는 만큼 습관을 추가할 수 있습니다. 운동, 독서, 명상, 언어 학습 등 다양한 목표를 자유롭게 설정하세요.</div>
+                    <div class="faq-question">Q. Track은 몇 개까지 추가할 수 있나요?</div>
+                    <div class="faq-answer">제한 없이 원하는 만큼 Track을 추가할 수 있습니다. 운동, 독서, 명상, 언어 학습 등 다양한 목표를 자유롭게 설정하세요.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Q. 수치형과 완료형의 차이는 무엇인가요?</div>
                     <div class="faq-answer">수치형은 "30분 운동", "50페이지 독서"처럼 달성 수치를 입력하는 방식입니다. 목표 수치 이상 달성하면 완료로 처리됩니다. 완료형은 명상, 일기 쓰기처럼 했는지 안 했는지만 체크하는 방식입니다.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Q. Overall 잔디밭은 무엇인가요?</div>
-                    <div class="faq-answer">모든 활성 습관을 하루에 전부 달성했을 때만 Overall 잔디에 커밋이 기록됩니다. 완벽한 하루를 만들었을 때의 성취감을 더욱 특별하게 느낄 수 있습니다.</div>
+                    <div class="faq-question">Q. Overview는 무엇인가요?</div>
+                    <div class="faq-answer">모든 활성 Track을 하루에 전부 달성했을 때만 Overview에 commit이 기록됩니다. 완벽한 하루(Perfect Day)를 만들었을 때의 성취감을 더욱 특별하게 느낄 수 있습니다.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Q. 데이터는 어디에 저장되나요?</div>
@@ -2364,7 +2676,7 @@
                 <a href="habit-tracker-tips.html">트래커 활용법</a>
                 <a href="privacy-policy.html">개인정보처리방침</a>
             </div>
-            <div class="landing-footer-copy">© 2026 Life Commit. 당신의 하루를 커밋하세요.</div>
+            <div class="landing-footer-copy">© 2026 Life Commit. Your commits build your trace.</div>
         </footer>
     </div>
 
@@ -2393,13 +2705,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-page="overall">
                             <span class="nav-icon">🏆</span>
-                            Overall
+                            Overview
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-page="stats">
                             <span class="nav-icon">📈</span>
-                            Stats
+                            Insights
                         </a>
                     </li>
                     <li class="nav-item">
@@ -2411,11 +2723,24 @@
                     <li class="nav-item">
                         <a class="nav-link" data-page="hobbies">
                             <span class="nav-icon">⚙️</span>
-                            Hobbies
+                            Tracks
                         </a>
                     </li>
                 </ul>
             </nav>
+            <!-- Pages 섹션 -->
+            <div class="pages-nav-section">
+                <div class="pages-nav-header" id="pagesNavHeader">
+                    <span>📓 Pages</span>
+                    <span id="pagesNavChevron">›</span>
+                </div>
+                <ul class="pages-nav-list" id="pagesNavList" style="display:none;">
+                    <!-- 동적으로 생성 -->
+                </ul>
+                <div class="pages-nav-add" id="pagesNavAddBtn">
+                    <span>＋ New Page</span>
+                </div>
+            </div>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6296484832176167"
@@ -2453,7 +2778,7 @@
                 <div class="dashboard-header">
                     <div class="today-info">
                         <h2 id="todayDate">2026년 1월 30일 금요일</h2>
-                        <div class="today-date">오늘의 목표를 완료하세요</div>
+                        <div class="today-date">Today's Trace</div>
                     </div>
                     <div class="progress-circle" id="todayProgress">
                         <div class="progress-inner">
@@ -2472,7 +2797,7 @@
                     <div class="month-summary-stats">
                         <div class="month-stat-item">
                             <div class="month-stat-value" id="summaryPerfectDays">0</div>
-                            <div class="month-stat-label">완벽한 날</div>
+                            <div class="month-stat-label">Perfect Days</div>
                         </div>
                         <div class="month-stat-item">
                             <div class="month-stat-value" id="summaryRate">0%</div>
@@ -2489,12 +2814,12 @@
                 <!-- Overall 잔디밭 섹션 -->
                 <div style="margin-top: 48px;">
                     <div class="page-header" style="margin-bottom: 24px;">
-                        <h2 class="page-title" style="font-size: 24px;">Overall 잔디밭</h2>
-                        <p class="page-subtitle">모든 목표를 달성한 완벽한 하루들</p>
+                        <h2 class="page-title" style="font-size: 24px;">Overview</h2>
+                        <p class="page-subtitle">모든 Track을 달성한 Perfect Days</p>
                     </div>
                     <div class="grass-container">
                         <div class="grass-header">
-                            <h3>연간 종합 달성</h3>
+                            <h3>Yearly Trace</h3>
                             <select class="year-selector" id="dashboardOverallYearSelect">
                                 <option value="2026">2026</option>
                                 <option value="2025">2025</option>
@@ -2504,17 +2829,17 @@
                     </div>
                     <div class="stats-grid" style="margin-top: 20px;">
                         <div class="stats-card">
-                            <div class="stats-card-title">올해 완벽한 하루</div>
+                            <div class="stats-card-title">Perfect Days</div>
                             <div class="stats-card-value" id="dashboardOverallYearCount">0</div>
                             <div class="stats-card-label">일</div>
                         </div>
                         <div class="stats-card">
-                            <div class="stats-card-title">현재 연속 기록</div>
+                            <div class="stats-card-title">Current Flow</div>
                             <div class="stats-card-value" id="dashboardOverallCurrentStreak">0</div>
                             <div class="stats-card-label">일</div>
                         </div>
                         <div class="stats-card">
-                            <div class="stats-card-title">최장 연속 기록</div>
+                            <div class="stats-card-title">Longest Flow</div>
                             <div class="stats-card-value" id="dashboardOverallMaxStreak">0</div>
                             <div class="stats-card-label">일</div>
                         </div>
@@ -2524,8 +2849,8 @@
                 <!-- 통계 섹션 -->
                 <div style="margin-top: 48px;">
                     <div class="page-header" style="margin-bottom: 24px;">
-                        <h2 class="page-title" style="font-size: 24px;">통계</h2>
-                        <p class="page-subtitle">당신의 성취를 확인하세요</p>
+                        <h2 class="page-title" style="font-size: 24px;">Insights</h2>
+                        <p class="page-subtitle">당신의 성장을 확인하세요</p>
                     </div>
                     <div style="margin-bottom: 24px;">
                         <select class="year-selector" id="dashboardStatsYearSelect">
@@ -2537,7 +2862,7 @@
                         <!-- 통계 카드들 -->
                     </div>
                     <div class="grass-container" style="margin-top: 24px;">
-                        <h3 style="margin-bottom: 24px;">취미별 달성률</h3>
+                        <h3 style="margin-bottom: 24px;">Track별 달성률</h3>
                         <div class="hobby-stats-list" id="dashboardHobbyStatsContainer">
                             <!-- 취미별 통계 -->
                         </div>
@@ -2548,11 +2873,11 @@
             <!-- 취미 관리 페이지 -->
             <div id="hobbiesPage" class="page">
                 <div class="page-header">
-                    <h1 class="page-title">취미 관리</h1>
-                    <p class="page-subtitle">습관과 목표를 관리하세요</p>
+                    <h1 class="page-title">Tracks</h1>
+                    <p class="page-subtitle">나만의 Track을 관리하세요</p>
                 </div>
                 <div style="margin-bottom: 24px;">
-                    <button class="btn btn-primary" id="newHobbyBtn">+ 새 취미 추가</button>
+                    <button class="btn btn-primary" id="newHobbyBtn">+ New Track</button>
                 </div>
                 <div id="hobbyListContainer" class="hobby-list">
                     <!-- 취미 목록 -->
@@ -2562,12 +2887,12 @@
             <!-- Overall 페이지 -->
             <div id="overallPage" class="page">
                 <div class="page-header">
-                    <h1 class="page-title">Overall 잔디밭</h1>
-                    <p class="page-subtitle">모든 목표를 달성한 완벽한 하루들</p>
+                    <h1 class="page-title">Overview</h1>
+                    <p class="page-subtitle">모든 Track을 달성한 Perfect Days</p>
                 </div>
                 <div class="grass-container">
                     <div class="grass-header">
-                        <h3>연간 종합 달성</h3>
+                        <h3>Yearly Trace</h3>
                         <select class="year-selector" id="overallYearSelect">
                             <option value="2026">2026</option>
                             <option value="2025">2025</option>
@@ -2577,17 +2902,17 @@
                 </div>
                 <div class="stats-grid">
                     <div class="stats-card">
-                        <div class="stats-card-title">올해 완벽한 하루</div>
+                        <div class="stats-card-title">Perfect Days</div>
                         <div class="stats-card-value" id="overallYearCount">0</div>
                         <div class="stats-card-label">일</div>
                     </div>
                     <div class="stats-card">
-                        <div class="stats-card-title">현재 연속 기록</div>
+                        <div class="stats-card-title">Current Flow</div>
                         <div class="stats-card-value" id="overallCurrentStreak">0</div>
                         <div class="stats-card-label">일</div>
                     </div>
                     <div class="stats-card">
-                        <div class="stats-card-title">최장 연속 기록</div>
+                        <div class="stats-card-title">Longest Flow</div>
                         <div class="stats-card-value" id="overallMaxStreak">0</div>
                         <div class="stats-card-label">일</div>
                     </div>
@@ -2597,8 +2922,8 @@
             <!-- 통계 페이지 -->
             <div id="statsPage" class="page">
                 <div class="page-header">
-                    <h1 class="page-title">통계</h1>
-                    <p class="page-subtitle">당신의 성취를 확인하세요</p>
+                    <h1 class="page-title">Insights</h1>
+                    <p class="page-subtitle">당신의 성장을 확인하세요</p>
                 </div>
                 <div style="margin-bottom: 24px;">
                     <select class="year-selector" id="statsYearSelect">
@@ -2610,7 +2935,7 @@
                     <!-- 통계 카드들 -->
                 </div>
                 <div class="grass-container">
-                    <h3 style="margin-bottom: 24px;">취미별 달성률</h3>
+                    <h3 style="margin-bottom: 24px;">Track별 달성률</h3>
                     <div class="hobby-stats-list" id="hobbyStatsContainer">
                         <!-- 취미별 통계 -->
                     </div>
@@ -2620,12 +2945,12 @@
             <!-- 취미 상세 페이지 -->
             <div id="hobbyDetailPage" class="page">
                 <div class="page-header">
-                    <h1 class="page-title" id="hobbyDetailTitle">취미 상세</h1>
+                    <h1 class="page-title" id="hobbyDetailTitle">Track Detail</h1>
                     <p class="page-subtitle" id="hobbyDetailSubtitle"></p>
                 </div>
                 <div class="grass-container">
                     <div class="grass-header">
-                        <h3 id="hobbyDetailName">잔디밭</h3>
+                        <h3 id="hobbyDetailName">Trace Map</h3>
                         <select class="year-selector" id="hobbyDetailYearSelect">
                             <option value="2026">2026</option>
                             <option value="2025">2025</option>
@@ -2641,7 +2966,7 @@
             <div id="monthlyPage" class="page">
                 <div class="page-header">
                     <h2 class="page-title">월간 보기</h2>
-                    <p class="page-subtitle">날짜별 습관 달성 현황과 메모를 한눈에</p>
+                    <p class="page-subtitle">날짜별 Commit 현황과 메모를 한눈에</p>
                 </div>
                 <div class="monthly-nav">
                     <button class="monthly-nav-btn" id="prevMonthBtn">‹</button>
@@ -2659,6 +2984,45 @@
                         <div class="monthly-chart-title">일별 달성 수</div>
                         <svg id="monthlyChartSvg" class="monthly-chart-svg"></svg>
                     </div>
+                </div>
+            </div>
+
+            <!-- Pages 목록 페이지 -->
+            <div id="pagesListPage" class="page">
+                <div class="page-header">
+                    <h1 class="page-title">Pages</h1>
+                    <p class="page-subtitle">나만의 스프레드를 만들어 커스텀 트래킹을 시작하세요</p>
+                </div>
+                <div id="pagesGridContainer" class="pages-grid">
+                    <!-- 동적으로 생성 -->
+                </div>
+            </div>
+
+            <!-- Page 상세 (스프레드) -->
+            <div id="pageDetailPage" class="page">
+                <div class="spread-header">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <button class="btn btn-secondary" id="backToPagesBtn" style="padding:6px 14px; font-size:13px;">← Pages</button>
+                        <div>
+                            <h1 class="page-title" id="spreadPageTitle" style="margin-bottom:2px;">Page</h1>
+                            <p class="page-subtitle" id="spreadPageMeta"></p>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                        <div class="spread-date-nav" id="spreadDateNav">
+                            <button class="spread-date-btn" id="spreadPrevBtn">‹</button>
+                            <div class="spread-date-label" id="spreadDateLabel"></div>
+                            <button class="spread-date-btn" id="spreadNextBtn">›</button>
+                        </div>
+                        <div class="spread-actions">
+                            <button class="btn btn-primary" id="addModuleBtn" style="font-size:13px; padding:8px 16px;">+ 모듈 추가</button>
+                            <button class="btn-icon" id="editPageBtn" title="페이지 설정">⚙️</button>
+                            <button class="btn-icon" id="deletePageBtn" title="페이지 삭제" style="color:var(--danger);">🗑</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="spreadGrid" class="spread-grid">
+                    <!-- 동적으로 생성 -->
                 </div>
             </div>
 
@@ -2697,17 +3061,216 @@
         </div>
     </div>
 
+    <!-- Page 생성/수정 모달 -->
+    <div id="pageModal" class="modal">
+        <div class="modal-content" style="position:relative; max-width:460px;">
+            <button class="modal-close" onclick="closePageModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="pageModalTitle">New Page</h2>
+                <div class="modal-subtitle">스프레드의 이름과 타입을 설정하세요</div>
+            </div>
+            <form id="pageForm">
+                <div class="form-group">
+                    <label class="form-label">페이지 이름 *</label>
+                    <input type="text" class="form-input" id="pageNameInput" placeholder="예: 5월 건강 스프레드" required maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">타입 *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="pageType" value="topic" checked>
+                            <span>📌 주제형</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="pageType" value="monthly">
+                            <span>📅 월간</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="pageType" value="weekly">
+                            <span>🗓 주간</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">아이콘</label>
+                    <div class="icon-picker" id="pageIconPicker">
+                        <div class="icon-option selected" data-icon="📓">📓</div>
+                        <div class="icon-option" data-icon="🏃">🏃</div>
+                        <div class="icon-option" data-icon="💪">💪</div>
+                        <div class="icon-option" data-icon="🧘">🧘</div>
+                        <div class="icon-option" data-icon="📚">📚</div>
+                        <div class="icon-option" data-icon="💤">💤</div>
+                        <div class="icon-option" data-icon="🍎">🍎</div>
+                        <div class="icon-option" data-icon="💰">💰</div>
+                        <div class="icon-option" data-icon="🎨">🎨</div>
+                        <div class="icon-option" data-icon="🌿">🌿</div>
+                        <div class="icon-option" data-icon="⭐">⭐</div>
+                        <div class="icon-option" data-icon="🔥">🔥</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closePageModal()">취소</button>
+                    <button type="submit" class="btn btn-success">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 모듈 추가/수정 모달 -->
+    <div id="moduleModal" class="modal">
+        <div class="modal-content" style="position:relative; max-width:500px;">
+            <button class="modal-close" onclick="closeModuleModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="moduleModalTitle">모듈 추가</h2>
+                <div class="modal-subtitle">트래킹할 모듈의 타입과 설정을 선택하세요</div>
+            </div>
+            <form id="moduleForm">
+                <!-- 타입 선택 (추가 시에만 표시) -->
+                <div id="moduleTypeSection">
+                    <div class="form-group">
+                        <label class="form-label">모듈 타입</label>
+                        <div class="module-type-grid">
+                            <div class="module-type-option selected" data-type="habit">
+                                <div class="module-type-option-icon">✅</div>
+                                <div class="module-type-option-name">Habit</div>
+                                <div class="module-type-option-desc">O/X 또는 수치 달성</div>
+                            </div>
+                            <div class="module-type-option" data-type="mood">
+                                <div class="module-type-option-icon">😊</div>
+                                <div class="module-type-option-name">Mood</div>
+                                <div class="module-type-option-desc">1~5 감정 레이팅</div>
+                            </div>
+                            <div class="module-type-option" data-type="log">
+                                <div class="module-type-option-icon">📊</div>
+                                <div class="module-type-option-name">Log</div>
+                                <div class="module-type-option-desc">수치 기록 (수면, 지출 등)</div>
+                            </div>
+                            <div class="module-type-option" data-type="journal">
+                                <div class="module-type-option-icon">📔</div>
+                                <div class="module-type-option-name">Journal</div>
+                                <div class="module-type-option-desc">자유 텍스트 메모</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 공통 필드 -->
+                <div class="form-group">
+                    <label class="form-label">모듈 이름 *</label>
+                    <input type="text" class="form-input" id="moduleNameInput" placeholder="예: 운동, 오늘의 기분" required maxlength="20">
+                </div>
+                <!-- 타입별 추가 필드 -->
+                <div id="moduleHabitFields">
+                    <div class="form-group">
+                        <label class="form-label">Habit 타입</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="habitType" value="quant" checked>
+                                <span>수치형</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="habitType" value="binary">
+                                <span>완료형</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="moduleQuantFields">
+                        <div class="form-group">
+                            <label class="form-label">목표</label>
+                            <div class="form-row">
+                                <input type="number" class="form-input" id="moduleTargetValue" placeholder="30" min="1">
+                                <select class="form-select" id="moduleTargetUnit">
+                                    <option value="분">분</option>
+                                    <option value="개">개</option>
+                                    <option value="회">회</option>
+                                    <option value="페이지">페이지</option>
+                                    <option value="km">km</option>
+                                    <option value="잔">잔</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="moduleLogFields" style="display:none;">
+                    <div class="form-group">
+                        <label class="form-label">단위</label>
+                        <div class="form-row">
+                            <input type="text" class="form-input" id="moduleLogUnit" placeholder="예: 시간, 원, kg">
+                            <input type="number" class="form-input" id="moduleLogTarget" placeholder="목표값 (선택)">
+                        </div>
+                    </div>
+                </div>
+                <div id="moduleMoodFields" style="display:none;">
+                    <div class="form-group">
+                        <label class="form-label">레이팅 레이블 (선택)</label>
+                        <input type="text" class="form-input" id="moduleMoodLabels" placeholder="예: 😞 😕 😐 🙂 😄">
+                    </div>
+                </div>
+                <!-- 아이콘 -->
+                <div class="form-group">
+                    <label class="form-label">아이콘</label>
+                    <div class="icon-picker" id="moduleIconPicker">
+                        <div class="icon-option selected" data-icon="💪">💪</div>
+                        <div class="icon-option" data-icon="📚">📚</div>
+                        <div class="icon-option" data-icon="✍️">✍️</div>
+                        <div class="icon-option" data-icon="🏃">🏃</div>
+                        <div class="icon-option" data-icon="🧘">🧘</div>
+                        <div class="icon-option" data-icon="😊">😊</div>
+                        <div class="icon-option" data-icon="💤">💤</div>
+                        <div class="icon-option" data-icon="💰">💰</div>
+                        <div class="icon-option" data-icon="🍎">🍎</div>
+                        <div class="icon-option" data-icon="💧">💧</div>
+                        <div class="icon-option" data-icon="📔">📔</div>
+                        <div class="icon-option" data-icon="⚡">⚡</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModuleModal()">취소</button>
+                    <button type="submit" class="btn btn-success">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 수치 기록 입력 모달 (Habit quant / Log) -->
+    <div id="logEntryModal" class="modal">
+        <div class="modal-content" style="position:relative; max-width:400px;">
+            <button class="modal-close" onclick="closeLogEntryModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="logEntryModalTitle">기록 입력</h2>
+                <div class="modal-subtitle" id="logEntryModalSub"></div>
+            </div>
+            <form id="logEntryForm">
+                <div class="form-group">
+                    <label class="form-label" id="logEntryLabel">값 *</label>
+                    <div class="form-row">
+                        <input type="number" class="form-input" id="logEntryValue" placeholder="0" min="0" step="0.1" required>
+                        <input type="text" class="form-input" id="logEntryUnit" readonly style="max-width:80px;">
+                    </div>
+                    <div id="logEntryTargetHint" style="margin-top:6px; font-size:12px; color:var(--text-muted);"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">메모 (선택)</label>
+                    <textarea class="form-textarea" id="logEntryMemo" placeholder="간단한 메모..." style="min-height:60px;"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeLogEntryModal()">취소</button>
+                    <button type="submit" class="btn btn-success">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- 취미 생성/수정 모달 -->
     <div id="hobbyModal" class="modal">
         <div class="modal-content" style="position: relative;">
             <button class="modal-close" onclick="closeHobbyModal()">×</button>
             <div class="modal-header">
-                <h2 class="modal-title" id="hobbyModalTitle">새 취미 추가</h2>
-                <div class="modal-subtitle">꾸준히 실천할 습관을 만들어보세요</div>
+                <h2 class="modal-title" id="hobbyModalTitle">New Track</h2>
+                <div class="modal-subtitle">나만의 Track을 설정하세요</div>
             </div>
             <form id="hobbyForm">
                 <div class="form-group">
-                    <label class="form-label">취미명 *</label>
+                    <label class="form-label">Track 이름 *</label>
                     <input type="text" class="form-input" id="hobbyName" placeholder="예: 운동, 독서, 영단어" required maxlength="20">
                 </div>
                 <div class="form-group">
@@ -2774,11 +3337,11 @@
     <div id="loginPromptModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="login-prompt-icon">🌱</div>
-            <div class="login-prompt-title">기록을 안전하게 보관하세요</div>
+            <div class="login-prompt-title">나의 Trace를 안전하게 보관하세요</div>
             <div class="login-prompt-desc">
                 현재 게스트 모드로 이 기기에만 저장되고 있습니다.<br>
                 로그인하면 클라우드에 자동 동기화되어<br>
-                어떤 기기에서도 내 잔디밭을 확인할 수 있어요.
+                어떤 기기에서도 나의 Trace를 확인할 수 있어요.
             </div>
             <div class="login-prompt-actions">
                 <button class="login-prompt-primary-btn" id="loginPromptLoginBtn">로그인 / 회원가입하기</button>
@@ -2862,6 +3425,17 @@
                     items: dayMemos
                 });
 
+                // Pages 데이터 저장
+                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'pages'), {
+                    items: pages
+                });
+                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'pageModules'), {
+                    items: pageModules
+                });
+                await setDoc(doc(db, 'users', currentUser.uid, 'data', 'pageEntries'), {
+                    items: pageEntries
+                });
+
                 console.log('Firestore에 저장 완료');
             } catch (error) {
                 console.error('Firestore 저장 오류:', error);
@@ -2895,6 +3469,20 @@
                     dayMemos = dayMemosDoc.data().items || [];
                 }
 
+                // Pages 데이터 로드
+                const pagesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'pages'));
+                if (pagesDoc.exists()) {
+                    pages = pagesDoc.data().items || [];
+                }
+                const pageModulesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'pageModules'));
+                if (pageModulesDoc.exists()) {
+                    pageModules = pageModulesDoc.data().items || [];
+                }
+                const pageEntriesDoc = await getDoc(doc(db, 'users', currentUser.uid, 'data', 'pageEntries'));
+                if (pageEntriesDoc.exists()) {
+                    pageEntries = pageEntriesDoc.data().items || [];
+                }
+
                 console.log('Firestore에서 로드 완료');
             } catch (error) {
                 console.error('Firestore 로드 오류:', error);
@@ -2908,7 +3496,10 @@
             localStorage.setItem('lifeCommitData', JSON.stringify({
                 hobbies,
                 records,
-                dayMemos
+                dayMemos,
+                pages,
+                pageModules,
+                pageEntries
             }));
         }
 
@@ -2919,6 +3510,9 @@
                 hobbies = parsed.hobbies || [];
                 records = parsed.records || [];
                 dayMemos = parsed.dayMemos || [];
+                pages = parsed.pages || [];
+                pageModules = parsed.pageModules || [];
+                pageEntries = parsed.pageEntries || [];
             }
         }
 
@@ -3463,9 +4057,9 @@
                 container.innerHTML = `
                     <div class="empty-state" style="grid-column: 1 / -1;">
                         <div class="empty-icon">🌱</div>
-                        <h3 class="empty-title">취미를 추가해보세요</h3>
-                        <p class="empty-text">첫 번째 습관을 만들고 꾸준함을 기록하세요</p>
-                        <button class="btn btn-primary" onclick="navigateTo('hobbies')">취미 추가하기</button>
+                        <h3 class="empty-title">Track을 추가해보세요</h3>
+                        <p class="empty-text">첫 번째 Track을 만들고 오늘부터 commit하세요</p>
+                        <button class="btn btn-primary" onclick="navigateTo('hobbies')">Track 추가하기</button>
                     </div>
                 `;
             } else {
@@ -3586,23 +4180,23 @@
                     <div class="stats-card-label">${totalAchieved} / ${totalPossible}</div>
                 </div>
                 <div class="stats-card">
-                    <div class="stats-card-title">완벽한 하루</div>
+                    <div class="stats-card-title">Perfect Days</div>
                     <div class="stats-card-value">${overallCount}</div>
                     <div class="stats-card-label">총 ${totalDays}일 중</div>
                 </div>
                 <div class="stats-card">
                     <div class="stats-card-title">종합 달성률</div>
                     <div class="stats-card-value">${overallRate}%</div>
-                    <div class="stats-card-label">완벽한 하루 비율</div>
+                    <div class="stats-card-label">Perfect Day 비율</div>
                 </div>
             `;
 
-            // 취미별 통계
+            // Track별 통계
             const hobbyStatsContainer = document.getElementById('dashboardHobbyStatsContainer');
             if (activeHobbies.length === 0) {
                 hobbyStatsContainer.innerHTML = `
                     <div class="empty-state">
-                        <p class="empty-text">활성 취미가 없습니다</p>
+                        <p class="empty-text">활성 Track이 없습니다</p>
                     </div>
                 `;
             } else {
@@ -3622,7 +4216,7 @@
                             <div style="text-align: right;">
                                 <div class="hobby-stat-value">${rate}%</div>
                                 <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-                                    현재 ${currentStreak}일 · 최장 ${maxStreak}일
+                                    Flow ${currentStreak}일 · Max ${maxStreak}일
                                 </div>
                             </div>
                         </div>
@@ -3670,8 +4264,8 @@
                     const isAchieved = checkOverallAchievement(dateStr);
                     const isCurrentYear = currentDate.getFullYear() === year;
                     
-                    html += `<div class="grass-cell-full ${isAchieved && isCurrentYear ? 'level-4' : ''}" 
-                             title="${dateStr}${isAchieved ? ' - 완벽한 하루' : ''}"></div>`;
+                    html += `<div class="grass-cell-full ${isAchieved && isCurrentYear ? 'level-4' : ''}"
+                             title="${dateStr}${isAchieved ? ' — Perfect Day ✓' : ''}"></div>`;
                     
                     currentDate.setDate(currentDate.getDate() + 1);
                 }
@@ -3903,8 +4497,8 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-icon">🌱</div>
-                        <h3 class="empty-title">아직 취미가 없습니다</h3>
-                        <p class="empty-text">첫 번째 취미를 추가해보세요</p>
+                        <h3 class="empty-title">아직 Track이 없습니다</h3>
+                        <p class="empty-text">첫 번째 Track을 추가해보세요</p>
                     </div>
                 `;
                 return;
@@ -3925,7 +4519,7 @@
                                 ${hobby.name}
                             </div>
                             <div class="hobby-list-meta">
-                                목표: ${targetText} · 총 ${recordCount}회 기록
+                                목표: ${targetText} · Total Commits ${recordCount}
                             </div>
                         </div>
                         <div class="hobby-list-actions">
@@ -3975,7 +4569,7 @@
             if (hobbyId) {
                 // 수정 모드
                 const hobby = hobbies.find(h => h.id === hobbyId);
-                document.getElementById('hobbyModalTitle').textContent = '취미 수정';
+                document.getElementById('hobbyModalTitle').textContent = 'Track 수정';
                 document.getElementById('hobbyName').value = hobby.name;
                 
                 // 타입 설정
@@ -4008,7 +4602,7 @@
                 document.getElementById('hobbyForm').setAttribute('data-edit-id', hobbyId);
             } else {
                 // 생성 모드
-                document.getElementById('hobbyModalTitle').textContent = '새 취미 추가';
+                document.getElementById('hobbyModalTitle').textContent = 'New Track';
                 document.getElementById('hobbyForm').reset();
                 document.getElementById('hobbyForm').removeAttribute('data-edit-id');
                 
@@ -4330,18 +4924,18 @@
                     <div class="stats-card-label">${totalAchieved} / ${totalPossible}</div>
                 </div>
                 <div class="stats-card">
-                    <div class="stats-card-title">완벽한 하루</div>
+                    <div class="stats-card-title">Perfect Days</div>
                     <div class="stats-card-value">${overallCount}</div>
                     <div class="stats-card-label">총 ${totalDays}일 중</div>
                 </div>
                 <div class="stats-card">
                     <div class="stats-card-title">종합 달성률</div>
                     <div class="stats-card-value">${overallRate}%</div>
-                    <div class="stats-card-label">완벽한 하루 비율</div>
+                    <div class="stats-card-label">Perfect Day 비율</div>
                 </div>
             `;
 
-            // 취미별 통계
+            // Track별 통계
             const hobbyStatsContainer = document.getElementById('hobbyStatsContainer');
             hobbyStatsContainer.innerHTML = activeHobbies.map(hobby => {
                 const hobbyRecords = yearRecords.filter(r => r.hobbyId === hobby.id);
@@ -4359,7 +4953,7 @@
                         <div style="text-align: right;">
                             <div class="hobby-stat-value">${rate}%</div>
                             <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-                                현재 ${currentStreak}일 · 최장 ${maxStreak}일
+                                Flow ${currentStreak}일 · Max ${maxStreak}일
                             </div>
                         </div>
                     </div>
@@ -4369,7 +4963,7 @@
             if (activeHobbies.length === 0) {
                 hobbyStatsContainer.innerHTML = `
                     <div class="empty-state">
-                        <p class="empty-text">활성 취미가 없습니다</p>
+                        <p class="empty-text">활성 Track이 없습니다</p>
                     </div>
                 `;
             }
@@ -4620,6 +5214,582 @@
             document.getElementById('summaryPerfectDays').textContent = perfectDays;
             document.getElementById('summaryRate').textContent = rate + '%';
         }
+
+        // ════════════════════════════════════════════════
+        //  PAGES — 데이터 모델 & 상태
+        // ════════════════════════════════════════════════
+        let pages        = [];   // { id, name, type, icon, moduleIds[], createdAt }
+        let pageModules  = [];   // { id, pageId, type, name, icon, order, settings{} }
+        let pageEntries  = [];   // { id, moduleId, date, type, value/rating/text/achieved, memo }
+
+        let currentPageId      = null;
+        let spreadCurrentDate  = new Date();
+        let editingPageId      = null;
+        let editingModuleId    = null;
+        let logEntryContext    = null; // { moduleId, date }
+
+        // ── 사이드바 Pages 토글 ──
+        document.getElementById('pagesNavHeader').addEventListener('click', function() {
+            const list = document.getElementById('pagesNavList');
+            const chev = document.getElementById('pagesNavChevron');
+            const open = list.style.display === 'none';
+            list.style.display = open ? 'block' : 'none';
+            chev.textContent = open ? '⌄' : '›';
+        });
+
+        document.getElementById('pagesNavAddBtn').addEventListener('click', function() {
+            openPageModal();
+        });
+
+        // ── 사이드바 Pages 목록 렌더 ──
+        function renderPagesNav() {
+            const list = document.getElementById('pagesNavList');
+            if (pages.length === 0) {
+                list.innerHTML = '<li style="padding:6px 12px; font-size:12px; color:var(--text-muted);">페이지 없음</li>';
+                return;
+            }
+            list.innerHTML = pages.map(p => `
+                <li class="pages-nav-item ${currentPageId === p.id ? 'active' : ''}"
+                    onclick="openPageDetail('${p.id}')">
+                    <span>${p.icon}</span>
+                    <span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.name}</span>
+                </li>
+            `).join('');
+        }
+
+        // ── Pages 목록 페이지 렌더 ──
+        function renderPagesList() {
+            const container = document.getElementById('pagesGridContainer');
+            let html = pages.map(p => `
+                <div class="page-card" onclick="openPageDetail('${p.id}')">
+                    <div class="page-card-icon">${p.icon}</div>
+                    <div class="page-card-name">${p.name}</div>
+                    <div class="page-card-meta">
+                        ${p.type === 'monthly' ? '월간' : p.type === 'weekly' ? '주간' : '주제형'}
+                        · 모듈 ${pageModules.filter(m => m.pageId === p.id).length}개
+                    </div>
+                </div>
+            `).join('');
+            html += `
+                <div class="page-card page-card-add" onclick="openPageModal()">
+                    <div class="page-card-add-icon">＋</div>
+                    <div>New Page</div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // ── Page 상세(스프레드) 열기 ──
+        function openPageDetail(pageId) {
+            currentPageId = pageId;
+            const page = pages.find(p => p.id === pageId);
+            if (!page) return;
+
+            document.getElementById('spreadPageTitle').textContent = `${page.icon} ${page.name}`;
+            const typeLabel = page.type === 'monthly' ? '월간' : page.type === 'weekly' ? '주간' : '주제형';
+            document.getElementById('spreadPageMeta').textContent = typeLabel;
+
+            // 날짜 네비게이션: topic 타입은 오늘 날짜 고정 노출
+            spreadCurrentDate = new Date();
+            renderSpreadDateNav(page);
+            renderSpreadGrid(page);
+            renderPagesNav();
+            navigateTo('pageDetail');
+        }
+
+        // ── 날짜 네비게이션 렌더 ──
+        function renderSpreadDateNav(page) {
+            const nav = document.getElementById('spreadDateNav');
+            nav.style.display = 'flex';
+            updateSpreadDateLabel(page);
+
+            document.getElementById('spreadPrevBtn').onclick = function() {
+                if (page.type === 'weekly') {
+                    spreadCurrentDate.setDate(spreadCurrentDate.getDate() - 7);
+                } else {
+                    spreadCurrentDate.setDate(spreadCurrentDate.getDate() - 1);
+                }
+                updateSpreadDateLabel(page);
+                renderSpreadGrid(page);
+            };
+            document.getElementById('spreadNextBtn').onclick = function() {
+                if (page.type === 'weekly') {
+                    spreadCurrentDate.setDate(spreadCurrentDate.getDate() + 7);
+                } else {
+                    spreadCurrentDate.setDate(spreadCurrentDate.getDate() + 1);
+                }
+                updateSpreadDateLabel(page);
+                renderSpreadGrid(page);
+            };
+        }
+
+        function updateSpreadDateLabel(page) {
+            const d = spreadCurrentDate;
+            const label = document.getElementById('spreadDateLabel');
+            if (page.type === 'weekly') {
+                const monday = new Date(d);
+                monday.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1));
+                const sunday = new Date(monday);
+                sunday.setDate(monday.getDate() + 6);
+                label.textContent = `${monday.getMonth()+1}/${monday.getDate()} – ${sunday.getMonth()+1}/${sunday.getDate()}`;
+            } else {
+                label.textContent = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+            }
+        }
+
+        // ── 스프레드 그리드 렌더 ──
+        function renderSpreadGrid(page) {
+            const grid = document.getElementById('spreadGrid');
+            const mods = pageModules.filter(m => m.pageId === page.id).sort((a,b) => a.order - b.order);
+            const dateStr = formatDate(spreadCurrentDate);
+
+            let html = mods.map(m => renderModuleCard(m, dateStr)).join('');
+            html += `
+                <div class="module-add-card" onclick="openModuleModal()">
+                    <span style="font-size:28px;">＋</span>
+                    <span>모듈 추가</span>
+                </div>
+            `;
+            grid.innerHTML = html;
+
+            // Journal 이벤트 바인딩
+            mods.filter(m => m.type === 'journal').forEach(m => {
+                const ta = document.getElementById(`journal-ta-${m.id}`);
+                const btn = document.getElementById(`journal-save-${m.id}`);
+                if (!ta || !btn) return;
+                ta.addEventListener('input', function() {
+                    btn.style.display = 'block';
+                });
+                btn.addEventListener('click', async function() {
+                    await savePageEntry(m.id, dateStr, { type: 'journal', text: ta.value });
+                    btn.style.display = 'none';
+                    btn.textContent = '저장됨 ✓';
+                    setTimeout(() => { btn.textContent = '저장'; }, 1500);
+                });
+            });
+
+            // Mood 이벤트 바인딩
+            mods.filter(m => m.type === 'mood').forEach(m => {
+                for (let r = 1; r <= 5; r++) {
+                    const btn = document.getElementById(`mood-btn-${m.id}-${r}`);
+                    if (!btn) continue;
+                    btn.addEventListener('click', async function() {
+                        await savePageEntry(m.id, dateStr, { type: 'mood', rating: r });
+                        renderSpreadGrid(page);
+                    });
+                }
+            });
+        }
+
+        // ── 모듈 카드 렌더 (타입 분기) ──
+        function renderModuleCard(mod, dateStr) {
+            const entry = pageEntries.find(e => e.moduleId === mod.id && e.date === dateStr);
+            const typeBadge = {
+                habit: '<span class="module-type-badge badge-habit">Habit</span>',
+                mood:  '<span class="module-type-badge badge-mood">Mood</span>',
+                log:   '<span class="module-type-badge badge-log">Log</span>',
+                journal: '<span class="module-type-badge badge-journal">Journal</span>',
+            }[mod.type] || '';
+
+            const headerActions = `
+                <div style="display:flex; gap:6px; align-items:center;">
+                    ${typeBadge}
+                    <button class="btn-icon" style="padding:4px 8px; font-size:12px;"
+                        onclick="openModuleModal('${mod.id}')">✏️</button>
+                    <button class="btn-icon" style="padding:4px 8px; font-size:12px; color:var(--danger);"
+                        onclick="deletePageModule('${mod.id}')">✕</button>
+                </div>
+            `;
+            const header = `
+                <div class="module-card-header">
+                    <div class="module-card-title">
+                        <span>${mod.icon}</span>
+                        <span>${mod.name}</span>
+                    </div>
+                    ${headerActions}
+                </div>
+            `;
+            let body = '';
+            if (mod.type === 'habit')   body = renderHabitModuleBody(mod, entry, dateStr);
+            if (mod.type === 'mood')    body = renderMoodModuleBody(mod, entry);
+            if (mod.type === 'log')     body = renderLogModuleBody(mod, entry, dateStr);
+            if (mod.type === 'journal') body = renderJournalModuleBody(mod, entry, dateStr);
+
+            return `<div class="module-card">${header}<div class="module-card-body">${body}</div></div>`;
+        }
+
+        function renderHabitModuleBody(mod, entry, dateStr) {
+            const s = mod.settings || {};
+            const isQuant = s.trackType === 'quant';
+            let statusClass = 'status-pending', statusText = '미완료';
+            let recordValue = '';
+            if (entry) {
+                if (isQuant) {
+                    recordValue = `${entry.value}${s.unit || ''}`;
+                    if (entry.value >= (s.target || 1) * 1.5) { statusClass = 'status-exceeded'; statusText = '초과달성'; }
+                    else if (entry.achieved) { statusClass = 'status-done'; statusText = '완료'; }
+                } else {
+                    if (entry.achieved) { statusClass = 'status-done'; statusText = '완료'; }
+                }
+            }
+            const metaText = isQuant ? `목표: ${s.target || '?'}${s.unit || ''}` : '완료 여부 체크';
+            const btnLabel = entry && entry.achieved
+                ? `<span style="text-decoration:line-through;">${isQuant ? recordValue : '완료'}</span>`
+                : (isQuant ? '기록하기' : '완료 체크');
+
+            return `
+                <div class="module-habit-row">
+                    <div>
+                        <div class="module-habit-meta">${metaText}</div>
+                        ${recordValue ? `<div style="font-size:13px; color:var(--success); font-weight:600; margin-top:2px;">${recordValue}</div>` : ''}
+                    </div>
+                    <span class="module-habit-status ${statusClass}">${statusText}</span>
+                </div>
+                <button class="btn btn-primary" style="width:100%; margin-top:12px; font-size:13px;"
+                    onclick="handleHabitModuleTap('${mod.id}','${dateStr}')">
+                    ${btnLabel}
+                </button>
+            `;
+        }
+
+        function renderMoodModuleBody(mod, entry) {
+            const s = mod.settings || {};
+            const rawLabels = (s.labels || '').trim();
+            const labelArr = rawLabels ? rawLabels.split(/\s+/) : ['😞','😕','😐','🙂','😄'];
+            const currentRating = entry ? entry.rating : 0;
+            const btns = [1,2,3,4,5].map(r => `
+                <button class="mood-btn ${currentRating === r ? 'selected' : ''}"
+                    id="mood-btn-${mod.id}-${r}" type="button">
+                    ${labelArr[r-1] || r}
+                </button>
+            `).join('');
+            const label = currentRating ? `${labelArr[currentRating-1] || currentRating} 선택됨` : '오늘의 기분을 선택하세요';
+            return `
+                <div class="mood-selector">${btns}</div>
+                <div class="mood-label">${label}</div>
+            `;
+        }
+
+        function renderLogModuleBody(mod, entry, dateStr) {
+            const s = mod.settings || {};
+            const val = entry ? entry.value : null;
+            const unit = s.unit || '';
+            const target = s.target ? parseFloat(s.target) : null;
+            const pct = (val !== null && target) ? Math.min(100, Math.round((val / target) * 100)) : 0;
+
+            return `
+                <div class="log-display">
+                    <div class="log-value">${val !== null ? val : '—'}</div>
+                    <div class="log-unit">${unit}</div>
+                </div>
+                ${target ? `<div class="log-target">목표: ${target}${unit}</div>
+                <div class="log-progress">
+                    <div class="log-progress-fill" style="width:${pct}%;"></div>
+                </div>` : ''}
+                <button class="btn btn-secondary" style="width:100%; margin-top:12px; font-size:13px;"
+                    onclick="openLogEntryModal('${mod.id}','${dateStr}')">
+                    ${val !== null ? '수정' : '입력'}
+                </button>
+            `;
+        }
+
+        function renderJournalModuleBody(mod, entry) {
+            const text = entry ? (entry.text || '') : '';
+            return `
+                <textarea class="journal-textarea" id="journal-ta-${mod.id}"
+                    placeholder="오늘의 기록을 남겨보세요...">${text}</textarea>
+                <button class="journal-save-btn" id="journal-save-${mod.id}" type="button">저장</button>
+            `;
+        }
+
+        // ── Habit 탭 처리 ──
+        async function handleHabitModuleTap(moduleId, dateStr) {
+            const mod = pageModules.find(m => m.id === moduleId);
+            const s = mod.settings || {};
+            if (s.trackType === 'quant') {
+                openLogEntryModal(moduleId, dateStr, true);
+            } else {
+                const existing = pageEntries.find(e => e.moduleId === moduleId && e.date === dateStr);
+                const achieved = existing ? !existing.achieved : true;
+                await savePageEntry(moduleId, dateStr, { type: 'habit', achieved });
+                const page = pages.find(p => p.id === currentPageId);
+                if (page) renderSpreadGrid(page);
+            }
+        }
+
+        // ── Log/Habit 수치 입력 모달 ──
+        function openLogEntryModal(moduleId, dateStr, isHabit = false) {
+            const mod = pageModules.find(m => m.id === moduleId);
+            const s = mod.settings || {};
+            logEntryContext = { moduleId, dateStr, isHabit };
+
+            document.getElementById('logEntryModalTitle').textContent = isHabit ? '오늘 기록하기' : '값 입력';
+            document.getElementById('logEntryModalSub').textContent = `${mod.icon} ${mod.name} — ${dateStr}`;
+            document.getElementById('logEntryLabel').textContent = isHabit ? `달성량 (목표: ${s.target}${s.unit || ''})` : '값';
+            document.getElementById('logEntryUnit').value = s.unit || '';
+            const target = s.target || (isHabit ? s.target : null);
+            document.getElementById('logEntryTargetHint').textContent = target ? `목표: ${target}${s.unit || ''}` : '';
+
+            const existing = pageEntries.find(e => e.moduleId === moduleId && e.date === dateStr);
+            document.getElementById('logEntryValue').value = existing ? existing.value : '';
+            document.getElementById('logEntryMemo').value = existing ? (existing.memo || '') : '';
+
+            document.getElementById('logEntryModal').classList.add('active');
+        }
+
+        function closeLogEntryModal() {
+            document.getElementById('logEntryModal').classList.remove('active');
+            logEntryContext = null;
+        }
+
+        document.getElementById('logEntryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!logEntryContext) return;
+            const { moduleId, dateStr, isHabit } = logEntryContext;
+            const mod = pageModules.find(m => m.id === moduleId);
+            const s = mod.settings || {};
+            const value = parseFloat(document.getElementById('logEntryValue').value);
+            const memo = document.getElementById('logEntryMemo').value;
+            const data = isHabit
+                ? { type: 'habit', value, achieved: value >= (s.target || 1), memo }
+                : { type: 'log', value, memo };
+            await savePageEntry(moduleId, dateStr, data);
+            closeLogEntryModal();
+            const page = pages.find(p => p.id === currentPageId);
+            if (page) renderSpreadGrid(page);
+        });
+
+        // ── pageEntry 저장 ──
+        async function savePageEntry(moduleId, dateStr, data) {
+            const idx = pageEntries.findIndex(e => e.moduleId === moduleId && e.date === dateStr);
+            const entry = { id: idx >= 0 ? pageEntries[idx].id : generateId(), moduleId, date: dateStr, ...data };
+            if (idx >= 0) pageEntries[idx] = entry;
+            else pageEntries.push(entry);
+            await saveToStorage();
+        }
+
+        // ── Page 모달 ──
+        function openPageModal(pageId = null) {
+            editingPageId = pageId;
+            const modal = document.getElementById('pageModal');
+            const form = document.getElementById('pageForm');
+            form.reset();
+
+            // 아이콘 피커 초기화
+            document.querySelectorAll('#pageIconPicker .icon-option').forEach(o => o.classList.remove('selected'));
+            document.querySelector('#pageIconPicker .icon-option').classList.add('selected');
+
+            if (pageId) {
+                const p = pages.find(p => p.id === pageId);
+                document.getElementById('pageModalTitle').textContent = 'Page 수정';
+                document.getElementById('pageNameInput').value = p.name;
+                document.querySelector(`input[name="pageType"][value="${p.type}"]`).checked = true;
+                const iconOpt = document.querySelector(`#pageIconPicker .icon-option[data-icon="${p.icon}"]`);
+                if (iconOpt) { document.querySelector('#pageIconPicker .icon-option').classList.remove('selected'); iconOpt.classList.add('selected'); }
+            } else {
+                document.getElementById('pageModalTitle').textContent = 'New Page';
+            }
+            modal.classList.add('active');
+        }
+
+        function closePageModal() {
+            document.getElementById('pageModal').classList.remove('active');
+            editingPageId = null;
+        }
+
+        document.getElementById('pageForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('pageNameInput').value.trim();
+            const type = document.querySelector('input[name="pageType"]:checked').value;
+            const icon = document.querySelector('#pageIconPicker .icon-option.selected')?.getAttribute('data-icon') || '📓';
+
+            if (editingPageId) {
+                const p = pages.find(p => p.id === editingPageId);
+                p.name = name; p.type = type; p.icon = icon;
+            } else {
+                pages.push({ id: generateId(), name, type, icon, moduleIds: [], createdAt: new Date().toISOString() });
+            }
+            await saveToStorage();
+            closePageModal();
+            renderPagesNav();
+            if (currentPage === 'pagesList') renderPagesList();
+            if (currentPage === 'pageDetail' && editingPageId) openPageDetail(editingPageId);
+        });
+
+        // Page 아이콘 선택
+        document.querySelectorAll('#pageIconPicker .icon-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('#pageIconPicker .icon-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Page 편집/삭제 버튼
+        document.getElementById('editPageBtn').addEventListener('click', function() {
+            if (currentPageId) openPageModal(currentPageId);
+        });
+        document.getElementById('deletePageBtn').addEventListener('click', async function() {
+            const p = pages.find(p => p.id === currentPageId);
+            if (!p) return;
+            if (!confirm(`"${p.name}" 페이지를 삭제할까요?\n모든 모듈과 기록도 함께 삭제됩니다.`)) return;
+            const modIds = pageModules.filter(m => m.pageId === currentPageId).map(m => m.id);
+            pages = pages.filter(p => p.id !== currentPageId);
+            pageModules = pageModules.filter(m => m.pageId !== currentPageId);
+            pageEntries = pageEntries.filter(e => !modIds.includes(e.moduleId));
+            currentPageId = null;
+            await saveToStorage();
+            renderPagesNav();
+            navigateTo('pagesList');
+        });
+        document.getElementById('backToPagesBtn').addEventListener('click', function() {
+            navigateTo('pagesList');
+        });
+
+        // ── 모듈 모달 ──
+        let selectedModuleType = 'habit';
+
+        function openModuleModal(moduleId = null) {
+            editingModuleId = moduleId;
+            const form = document.getElementById('moduleForm');
+            form.reset();
+            document.querySelectorAll('#moduleIconPicker .icon-option').forEach(o => o.classList.remove('selected'));
+            document.querySelector('#moduleIconPicker .icon-option').classList.add('selected');
+            document.getElementById('moduleTypeSection').style.display = moduleId ? 'none' : 'block';
+
+            if (moduleId) {
+                const m = pageModules.find(m => m.id === moduleId);
+                document.getElementById('moduleModalTitle').textContent = '모듈 수정';
+                document.getElementById('moduleNameInput').value = m.name;
+                selectedModuleType = m.type;
+                const s = m.settings || {};
+                if (m.type === 'habit') {
+                    document.querySelector(`input[name="habitType"][value="${s.trackType || 'binary'}"]`).checked = true;
+                    if (s.trackType === 'quant') {
+                        document.getElementById('moduleTargetValue').value = s.target || '';
+                        document.getElementById('moduleTargetUnit').value = s.unit || '분';
+                    }
+                } else if (m.type === 'log') {
+                    document.getElementById('moduleLogUnit').value = s.unit || '';
+                    document.getElementById('moduleLogTarget').value = s.target || '';
+                } else if (m.type === 'mood') {
+                    document.getElementById('moduleMoodLabels').value = s.labels || '';
+                }
+                const iconOpt = document.querySelector(`#moduleIconPicker .icon-option[data-icon="${m.icon}"]`);
+                if (iconOpt) { iconOpt.classList.add('selected'); document.querySelector('#moduleIconPicker .icon-option:not(.selected)')?.classList.remove('selected'); }
+            } else {
+                document.getElementById('moduleModalTitle').textContent = '모듈 추가';
+                selectedModuleType = 'habit';
+            }
+            updateModuleTypeUI();
+            document.getElementById('moduleModal').classList.add('active');
+        }
+
+        function closeModuleModal() {
+            document.getElementById('moduleModal').classList.remove('active');
+            editingModuleId = null;
+        }
+
+        function updateModuleTypeUI() {
+            document.querySelectorAll('.module-type-option').forEach(o => {
+                o.classList.toggle('selected', o.getAttribute('data-type') === selectedModuleType);
+            });
+            document.getElementById('moduleHabitFields').style.display = selectedModuleType === 'habit' ? 'block' : 'none';
+            document.getElementById('moduleLogFields').style.display   = selectedModuleType === 'log'   ? 'block' : 'none';
+            document.getElementById('moduleMoodFields').style.display  = selectedModuleType === 'mood'  ? 'block' : 'none';
+
+            // Habit quant/binary 필드 토글
+            const isQuant = document.querySelector('input[name="habitType"]:checked')?.value === 'quant';
+            document.getElementById('moduleQuantFields').style.display = (selectedModuleType === 'habit' && isQuant) ? 'block' : 'none';
+        }
+
+        document.querySelectorAll('.module-type-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                selectedModuleType = this.getAttribute('data-type');
+                updateModuleTypeUI();
+            });
+        });
+
+        document.querySelectorAll('input[name="habitType"]').forEach(r => {
+            r.addEventListener('change', updateModuleTypeUI);
+        });
+
+        document.querySelectorAll('#moduleIconPicker .icon-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('#moduleIconPicker .icon-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        document.getElementById('moduleForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!currentPageId) return;
+            const name = document.getElementById('moduleNameInput').value.trim();
+            const icon = document.querySelector('#moduleIconPicker .icon-option.selected')?.getAttribute('data-icon') || '📌';
+            const type = editingModuleId ? (pageModules.find(m => m.id === editingModuleId)?.type || selectedModuleType) : selectedModuleType;
+
+            let settings = {};
+            if (type === 'habit') {
+                const trackType = document.querySelector('input[name="habitType"]:checked').value;
+                settings.trackType = trackType;
+                if (trackType === 'quant') {
+                    settings.target = parseFloat(document.getElementById('moduleTargetValue').value) || 1;
+                    settings.unit = document.getElementById('moduleTargetUnit').value;
+                }
+            } else if (type === 'log') {
+                settings.unit = document.getElementById('moduleLogUnit').value;
+                settings.target = parseFloat(document.getElementById('moduleLogTarget').value) || null;
+            } else if (type === 'mood') {
+                settings.labels = document.getElementById('moduleMoodLabels').value;
+            }
+
+            if (editingModuleId) {
+                const m = pageModules.find(m => m.id === editingModuleId);
+                m.name = name; m.icon = icon; m.settings = settings;
+            } else {
+                const order = pageModules.filter(m => m.pageId === currentPageId).length;
+                pageModules.push({ id: generateId(), pageId: currentPageId, type, name, icon, order, settings, createdAt: new Date().toISOString() });
+            }
+
+            await saveToStorage();
+            closeModuleModal();
+            const page = pages.find(p => p.id === currentPageId);
+            if (page) renderSpreadGrid(page);
+        });
+
+        // ── 모듈 삭제 ──
+        async function deletePageModule(moduleId) {
+            const m = pageModules.find(m => m.id === moduleId);
+            if (!m) return;
+            if (!confirm(`"${m.name}" 모듈을 삭제할까요?`)) return;
+            pageModules = pageModules.filter(m => m.id !== moduleId);
+            pageEntries = pageEntries.filter(e => e.moduleId !== moduleId);
+            await saveToStorage();
+            const page = pages.find(p => p.id === currentPageId);
+            if (page) renderSpreadGrid(page);
+        }
+
+        // ── navigateTo 에 pageDetail / pagesList 추가 ──
+        const _origNavigateTo = navigateTo;
+        navigateTo = function(page) {
+            if (page === 'pagesList') {
+                currentPage = 'pagesList';
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('pagesListPage').classList.add('active');
+                renderPagesList();
+                renderPagesNav();
+                return;
+            }
+            if (page === 'pageDetail') {
+                currentPage = 'pageDetail';
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('pageDetailPage').classList.add('active');
+                renderPagesNav();
+                return;
+            }
+            _origNavigateTo(page);
+        };
 
         // 초기 로드
         window.addEventListener('load', function() {
